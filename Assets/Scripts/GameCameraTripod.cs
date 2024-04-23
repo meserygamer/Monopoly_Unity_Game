@@ -1,4 +1,3 @@
-using ModestTree;
 using UnityEngine;
 using Zenject;
 
@@ -6,6 +5,7 @@ namespace Scripts
 {
     public class GameCameraTripod : MonoBehaviour
     {
+        [SerializeField] private float _rotationSpeed = 5;
         private PlayerInput _playerInput;
 
 
@@ -16,25 +16,10 @@ namespace Scripts
         }
 
 
-        private void OnEnable()
+        private void Update()
         {
-            _playerInput.CameraControl.RotateLeft.performed += RotateLeftPerformedHandler;
-            _playerInput.CameraControl.RotateRight.performed += RotateRightPerformedHandler;
-        }
-        private void OnDisable()
-        {
-            _playerInput.CameraControl.RotateLeft.performed -= RotateLeftPerformedHandler;
-            _playerInput.CameraControl.RotateRight.performed -= RotateRightPerformedHandler;
-        }
-
-
-        private void RotateRightPerformedHandler(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-        {
-            transform.Rotate(Vector3.up, -20);
-        }
-        private void RotateLeftPerformedHandler(UnityEngine.InputSystem.InputAction.CallbackContext obj)
-        {
-            transform.Rotate(Vector3.up, 20);
+            float rotationVector = _playerInput.CameraControl.CameraRotate.ReadValue<float>();
+            transform.Rotate(Vector3.up, _rotationSpeed * Time.deltaTime * -rotationVector);
         }
     }
 }

@@ -6,46 +6,48 @@
             "id": "f6315391-c877-4d60-b7d8-0875908b3765",
             "actions": [
                 {
-                    "name": "RotateLeft",
-                    "type": "Button",
-                    "id": "e7b34d78-b0ed-4c90-b4e6-fd02e98ed168",
-                    "expectedControlType": "Button",
+                    "name": "CameraRotate",
+                    "type": "Value",
+                    "id": "5fd7f542-061f-405b-a981-42bf9820829f",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "RotateRight",
-                    "type": "Button",
-                    "id": "9574d603-339c-486f-868d-21edb847e2aa",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
                 {
-                    "name": "",
-                    "id": "5691fbed-7e55-4054-9c3f-dd9d627e4e2f",
+                    "name": "RotationVector",
+                    "id": "6eabeae4-1828-4275-a4e7-3209ef082577",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraRotate",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Negative",
+                    "id": "fbf0b777-eb71-4972-ae53-9ac453b6b4b7",
                     "path": "<Keyboard>/q",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard_Mouse",
-                    "action": "RotateLeft",
+                    "action": "CameraRotate",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 },
                 {
-                    "name": "",
-                    "id": "39d7ab56-6024-4d73-b9a4-144979e7bc53",
+                    "name": "Positive",
+                    "id": "de3aeb51-8e1f-45b7-b533-7589d1d63a7a",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard_Mouse",
-                    "action": "RotateRight",
+                    "action": "CameraRotate",
                     "isComposite": false,
-                    "isPartOfComposite": false
+                    "isPartOfComposite": true
                 }
             ]
         }
