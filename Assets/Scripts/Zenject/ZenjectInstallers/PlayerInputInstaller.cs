@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-namespace Scripts.ZenjectInstallers
+namespace Scripts.Zenject.ZenjectInstallers
 {
     public class PlayerInputInstaller : MonoInstaller
     {
