@@ -1,4 +1,3 @@
-using System;
 using Scripts.Game.Services;
 using Scripts.Game.View;
 
@@ -11,6 +10,12 @@ namespace Scripts.Game.Presenter
             _playerMovementService = playerMovementService;
             _playerMovementService.PlayerPositionChanged += PlayerPositionChangedHandler;
             UpdatePlayersPositions();
+        }
+
+
+        ~PlayerPositionShowerPresenter()
+        {
+            _playerMovementService.PlayerPositionChanged -= PlayerPositionChangedHandler;
         }
 
 

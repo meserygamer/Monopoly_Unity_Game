@@ -20,9 +20,9 @@ namespace Scripts.Game.View
         public bool PlacePlayerOnGameSquare(PlayersPawn player)
         {
             if(_freePlacementPoints.Count == 0)
-                return false;
+                throw new System.Exception("Количество свободных мест на точке - 0");
             if(player is null)
-                return false;
+                throw new System.Exception("PlayersPawn - null");
             Transform occupiedPlace = _freePlacementPoints.Pop();
             _busyPlacementsPoints.Add(player, occupiedPlace);
             MovePlayerToOccupiedPlace(player, occupiedPlace);
@@ -32,9 +32,9 @@ namespace Scripts.Game.View
         {
             Transform freePlace;
             if(player is null)
-                return false;
-            if(!_busyPlacementsPoints.TryGetValue(player, out freePlace))
-                return false;
+                throw new System.Exception("PlayersPawn - null");
+            if (!_busyPlacementsPoints.TryGetValue(player, out freePlace))
+                throw new System.Exception("PlayersPawn не имеет зарезервированных мест для освобождения");
             _busyPlacementsPoints.Remove(player);
             _freePlacementPoints.Push(freePlace);
 

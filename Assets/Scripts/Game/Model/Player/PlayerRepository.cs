@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 
 namespace Scripts.Game.Model.Player
@@ -7,7 +8,10 @@ namespace Scripts.Game.Model.Player
     /// </summary>
     public sealed class PlayerRepository
     {
-        private List<PlayerInfo> PlayersInfo { get; } = new List<PlayerInfo>();
+        public List<PlayerInfo> PlayersInfo { get; } = new List<PlayerInfo>();
+
+
+        public Action PlayersInfoRegenerated;
 
 
         public void GeneratePlayers(uint playersCount)
@@ -19,6 +23,7 @@ namespace Scripts.Game.Model.Player
                 playerInfo.BankAccount.MoneyAmount = 2000;
                 PlayersInfo.Add(playerInfo);
             }
+            PlayersInfoRegenerated?.Invoke();
         }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System;
 using Scripts.Game.Model.Player;
+using UnityEngine;
 
 namespace Scripts.Game.Services
 {
@@ -25,11 +26,12 @@ namespace Scripts.Game.Services
 
         private uint RollDice()
         {
-            return Convert.ToUInt32(new Random().Next(1, 7));
+            return Convert.ToUInt32(new System.Random().Next(1, 7));
         }
         private void AddDiceRollToHistory(PlayerInfo player, DiceRoll diceRoll)
         {
             List<DiceRoll> _playerDiceRolls;
+            Debug.Log("На кубиках  - " + diceRoll.SumCameUpNumbers);
             if (_rollHistory.TryGetValue(player, out _playerDiceRolls))
             {
                 _playerDiceRolls.Add(diceRoll);

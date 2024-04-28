@@ -1,5 +1,3 @@
-using UnityEngine;
-using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Scripts.Zenject.ZenjectInstallers

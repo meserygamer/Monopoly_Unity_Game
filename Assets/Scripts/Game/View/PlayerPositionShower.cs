@@ -1,4 +1,5 @@
 using Scripts.Game.Presenter;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -8,6 +9,8 @@ namespace Scripts.Game.View
     {
         [SerializeField] private GameSquarePlayersPlacer[] _gameSquarePlayersPlacers;
         [SerializeField] private PlayersPawn[] _playersPawns;
+
+        private Dictionary<int, uint> _currentPlayersPawnPositions = new Dictionary<int, uint>();
 
         private PlayerPositionShowerPresenter _presenter;
 
@@ -20,7 +23,18 @@ namespace Scripts.Game.View
         }
 
 
-        public void MovePlayersPawn(int playersPawnID, uint gameSquareID) 
-            => _gameSquarePlayersPlacers[gameSquareID].PlacePlayerOnGameSquare(_playersPawns[playersPawnID]);
+        public void MovePlayersPawn(int playersPawnID, uint gameSquareID)
+        {
+            if(_currentPlayersPawnPositions.ContainsKey(playersPawnID))
+            {
+                _gameSquarePlayersPlacers[_currentPlayersPawnPositions[playersPawnID]].FreePlaceOnGameSquare(_playersPawns[playersPawnID]);
+                _currentPlayersPawnPositions[playersPawnID] = gameSquareID;
+            }
+            else
+            {
+                _currentPlayersPawnPositions.Add(playersPawnID, gameSquareID);
+            }
+            _gameSquarePlayersPlacers[gameSquareID].PlacePlayerOnGameSquare(_playersPawns[playersPawnID]);
+        }
     }
 }
