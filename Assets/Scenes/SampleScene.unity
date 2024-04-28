@@ -1404,6 +1404,7 @@ MonoBehaviour:
   - {fileID: 4343890147484963357, guid: f2f8a3a3c41c9444c846129de2599f57, type: 3}
   - {fileID: -3801845601600698380, guid: 4456a1fa1ada1d449808cb6a8a25fce4, type: 3}
   - {fileID: -8743850472754955383, guid: 2580b917f03eb1c40beebcdc71a657f7, type: 3}
+  _nextPrefabIndex: 0
 --- !u!4 &185611362
 Transform:
   m_ObjectHideFlags: 0
@@ -1903,8 +1904,6 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 1125959495}
-  - {fileID: 185611360}
-  - {fileID: 1785838010}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -7151,6 +7150,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameField: {fileID: 169383525}
   _playersCount: 4
+  _gamePlayers: []
+  _currentPlayerID: 0
+  _playerFactory: {fileID: 0}
 --- !u!4 &947081787
 Transform:
   m_ObjectHideFlags: 0

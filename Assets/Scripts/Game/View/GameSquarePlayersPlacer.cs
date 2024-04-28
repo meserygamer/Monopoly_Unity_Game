@@ -1,25 +1,23 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Scripts.Game.Players;
 
-namespace Scripts.Game.GameSquares
+namespace Scripts.Game.View
 {
-    [RequireComponent(typeof(GameSquare))]
-    public class PlayerPlacerOnGameSquare : MonoBehaviour
+    public sealed class GameSquarePlayersPlacer : MonoBehaviour
     {
-        [SerializeField] private Transform[] _placementPoints;
+        [SerializeField] Transform[] _playerPlacements;
         private Stack<Transform> _freePlacementPoints;
-        private Dictionary<Player, Transform> _busyPlacementsPoints;
+        private Dictionary<PlayersPawn, Transform> _busyPlacementsPoints;
 
 
         private void Awake()
         {
-            _freePlacementPoints = new Stack<Transform>(_placementPoints);
-            _busyPlacementsPoints = new Dictionary<Player, Transform>();
+            _freePlacementPoints = new Stack<Transform>(_playerPlacements);
+            _busyPlacementsPoints = new Dictionary<PlayersPawn, Transform>();
         }
 
 
-        public bool PlacePlayerOnGameSquare(Player player)
+        public bool PlacePlayerOnGameSquare(PlayersPawn player)
         {
             if(_freePlacementPoints.Count == 0)
                 return false;
@@ -30,7 +28,7 @@ namespace Scripts.Game.GameSquares
             MovePlayerToOccupiedPlace(player, occupiedPlace);
             return true;
         }
-        public bool FreePlaceOnGameSquare(Player player)
+        public bool FreePlaceOnGameSquare(PlayersPawn player)
         {
             Transform freePlace;
             if(player is null)
@@ -43,7 +41,7 @@ namespace Scripts.Game.GameSquares
             return true;
         }
 
-        private void MovePlayerToOccupiedPlace(Player player, Transform occupiedPlace)
+        private void MovePlayerToOccupiedPlace(PlayersPawn player, Transform occupiedPlace)
         {
             player.gameObject.transform.SetParent(occupiedPlace, true);
             player.gameObject.transform.SetLocalPositionAndRotation(new Vector3(), new Quaternion());

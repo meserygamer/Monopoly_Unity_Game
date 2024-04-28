@@ -1,16 +1,16 @@
-﻿using Scripts.Game.Players;
 using System.Collections.Generic;
 using System;
+using Scripts.Game.Model.Player;
 
 namespace Scripts.Game.Services
 {
     public class DiceRollService
     {
-        private readonly Dictionary<Player, List<DiceRoll>> _rollHistory = 
-            new Dictionary<Player, List<DiceRoll>>();
+        private readonly Dictionary<PlayerInfo, List<DiceRoll>> _rollHistory = 
+            new Dictionary<PlayerInfo, List<DiceRoll>>();
 
 
-        public DiceRoll SimulatePlayerRollDice(Player player)
+        public DiceRoll SimulatePlayerRollDice(PlayerInfo player)
         {
             if (player is null)
                 throw new ArgumentNullException();
@@ -25,9 +25,9 @@ namespace Scripts.Game.Services
 
         private uint RollDice()
         {
-            return Convert.ToUInt32((new Random()).Next(1, 7));
+            return Convert.ToUInt32(new Random().Next(1, 7));
         }
-        private void AddDiceRollToHistory(Player player, DiceRoll diceRoll)
+        private void AddDiceRollToHistory(PlayerInfo player, DiceRoll diceRoll)
         {
             List<DiceRoll> _playerDiceRolls;
             if (_rollHistory.TryGetValue(player, out _playerDiceRolls))
