@@ -7,13 +7,12 @@ namespace Scripts.Game.View
     {
         [SerializeField] Transform[] _playerPlacements;
         private Stack<Transform> _freePlacementPoints;
-        private Dictionary<PlayersPawn, Transform> _busyPlacementsPoints;
+        private Dictionary<PlayersPawn, Transform> _busyPlacementsPoints = new Dictionary<PlayersPawn, Transform>();
 
 
         private void Awake()
         {
             _freePlacementPoints = new Stack<Transform>(_playerPlacements);
-            _busyPlacementsPoints = new Dictionary<PlayersPawn, Transform>();
         }
 
 
@@ -30,10 +29,9 @@ namespace Scripts.Game.View
         }
         public bool FreePlaceOnGameSquare(PlayersPawn player)
         {
-            Transform freePlace;
             if(player is null)
                 throw new System.Exception("PlayersPawn - null");
-            if (!_busyPlacementsPoints.TryGetValue(player, out freePlace))
+            if (!_busyPlacementsPoints.TryGetValue(player, out Transform freePlace))
                 throw new System.Exception("PlayersPawn не имеет зарезервированных мест для освобождения");
             _busyPlacementsPoints.Remove(player);
             _freePlacementPoints.Push(freePlace);

@@ -7,7 +7,7 @@ namespace Scripts.Game.Model.Player
         private int _moneyAmount = 0;
 
         
-        public event Action<int> BankAccountMoneyAmountChanged;
+        public event Action<BankAccount> BankAccountMoneyAmountChanged;
 
 
         public int MoneyAmount
@@ -16,7 +16,7 @@ namespace Scripts.Game.Model.Player
             set
             {
                 _moneyAmount = value;
-                BankAccountMoneyAmountChanged?.Invoke(_moneyAmount);
+                BankAccountMoneyAmountChanged?.Invoke(this);
             }
         }
     }

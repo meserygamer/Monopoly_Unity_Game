@@ -16,7 +16,7 @@ namespace Scripts.Game.View
         }
 
 
-        private void Awake()
+        private void Start()
         {
             _levelStateMachine.EnterIn<StartLevelState>();
             _levelStateMachine.EnterIn<GoingGameState>();

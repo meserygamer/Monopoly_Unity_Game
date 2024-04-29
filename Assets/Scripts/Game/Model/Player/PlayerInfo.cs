@@ -1,3 +1,5 @@
+using System;
+
 namespace Scripts.Game.Model.Player
 {
     /// <summary>
@@ -8,7 +10,18 @@ namespace Scripts.Game.Model.Player
         private string _name = "Player";
 
 
-        public string Name { get; set; }
+        public event Action<PlayerInfo> NameChanged;
+
+
+        public string Name 
+        { 
+            get => _name; 
+            set
+            {
+                _name = value;
+                NameChanged?.Invoke(this);
+            }
+        }
 
         public BankAccount BankAccount { get; } = new BankAccount();
     }
