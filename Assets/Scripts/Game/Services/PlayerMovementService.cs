@@ -34,21 +34,22 @@ namespace Scripts.Game.Services
         private PlayerRepository _playerRepository;
 
 
-        public event Action<int, uint> PlayerPositionChanged;
+        public event Action<int, uint?, uint> PlayerPositionChanged;
 
 
         public List<PlayerPosition> PlayersPositions { get; } = new List<PlayerPosition>();
 
 
-        public void MovePlayer(PlayerInfo player, uint passedgameSquaresCount)
+        private void PlayersInfoRegeneratedHandler() => GeneratePositionsForNewPlayers(_playerRepository.PlayersInfo.ToArray());
+
+
+        public void MovePlayer(PlayerInfo player, uint passedGameSquaresCount)
         {
             PlayerPosition playerPosition = PlayersPositions.Find(a => a.Player == player);
-            playerPosition.PositionOnGameBoard = GetNewPlayerPosition(playerPosition, passedgameSquaresCount);
-            PlayerPositionChanged?.Invoke(PlayersPositions.IndexOf(playerPosition), playerPosition.PositionOnGameBoard);
+            playerPosition.PositionOnGameBoard = GetNewPlayerPosition(playerPosition, passedGameSquaresCount);
+            PlayerPositionChanged?.Invoke(PlayersPositions.IndexOf(playerPosition), passedGameSquaresCount, playerPosition.PositionOnGameBoard);
         }
-        public void MovePlayer(int playerID, uint passedgameSquaresCount) => MovePlayer(PlayersPositions[playerID].Player, passedgameSquaresCount);
-
-        private void PlayersInfoRegeneratedHandler() => GeneratePositionsForNewPlayers(_playerRepository.PlayersInfo.ToArray());
+        public void MovePlayer(int playerID, uint passedGameSquaresCount) => MovePlayer(PlayersPositions[playerID].Player, passedGameSquaresCount);
 
         private void GeneratePositionsForNewPlayers(PlayerInfo[] playerInfos)
         {
@@ -56,7 +57,7 @@ namespace Scripts.Game.Services
             for(int i = 0; i < playerInfos.Length; i++)
             {
                 PlayersPositions.Add(new PlayerPosition { Player = playerInfos[i], PositionOnGameBoard = 0 });
-                PlayerPositionChanged?.Invoke(i, 0);
+                PlayerPositionChanged?.Invoke(i, null, 0);
             }
         }
 

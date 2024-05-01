@@ -9,7 +9,6 @@ namespace Scripts.Zenject.ZenjectInstallers
         public override void InstallBindings()
         {
             Container.Bind<PlayersStatisticsShower>().FromComponentInHierarchy().AsSingle();
-            Container.Bind<PlayersStatisticsShowerPresenter>().FromNew().AsTransient().NonLazy();
         }
     }
 }

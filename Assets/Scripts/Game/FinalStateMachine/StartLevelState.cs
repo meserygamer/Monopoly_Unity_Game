@@ -1,4 +1,5 @@
 using Scripts.Game.Model.Player;
+using UnityEngine;
 
 namespace Scripts.Game.FinalStateMachine
 {
@@ -15,6 +16,7 @@ namespace Scripts.Game.FinalStateMachine
 
         public void EnterInState()
         {
+            Application.targetFrameRate = 90;
             _playerRepository.GeneratePlayers(4);
         }
 

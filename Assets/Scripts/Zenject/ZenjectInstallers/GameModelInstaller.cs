@@ -1,14 +1,18 @@
 using Scripts.Game.GameField;
 using Scripts.Game.Model.GameField;
+using Scripts.Game.Model.GameMaster;
+using Scripts.Game.Model.Player;
 using Zenject;
 
 namespace Scripts.Zenject.ZenjectInstallers
 {
-    public class GameBoardInfoInstaller : MonoInstaller
+    public class GameModelInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {
             Container.Bind<GameBoardInfo>().FromFactory<GameBoardInfoFactory>().AsSingle();
+            Container.Bind<PlayerRepository>().FromNew().AsSingle();
+            Container.Bind<AwardingRewardsMaster>().FromNew().AsSingle().NonLazy();
         }
     }
 

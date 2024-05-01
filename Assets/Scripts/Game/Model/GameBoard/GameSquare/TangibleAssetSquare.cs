@@ -1,3 +1,5 @@
+using Scripts.Game.Model.PlayersTangibleAssets;
+
 namespace Scripts.Game.Model.GameField.GameSquare
 {
     /// <summary>
