@@ -1,4 +1,4 @@
-using Scripts.Game.FinalStateMachine;
+using Scripts.Game.StateMachine;
 using Zenject;
 
 namespace Scripts.Zenject.ZenjectInstallers

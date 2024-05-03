@@ -1,4 +1,4 @@
-namespace Scripts.Game.FinalStateMachine
+namespace Scripts.Game.StateMachine
 {
     public class LevelStates
     {

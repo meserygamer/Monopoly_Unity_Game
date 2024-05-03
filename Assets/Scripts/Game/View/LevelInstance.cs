@@ -1,4 +1,4 @@
-using Scripts.Game.FinalStateMachine;
+using Scripts.Game.StateMachine;
 using UnityEngine;
 using Zenject;
 
@@ -19,7 +19,6 @@ namespace Scripts.Game.View
         private void Start()
         {
             _levelStateMachine.EnterIn<StartLevelState>();
-            _levelStateMachine.EnterIn<GoingGameState>();
         }
     }
 }

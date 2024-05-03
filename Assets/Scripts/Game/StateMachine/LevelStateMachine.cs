@@ -1,15 +1,17 @@
 using System;
 using System.Collections.Generic;
 
-namespace Scripts.Game.FinalStateMachine
+namespace Scripts.Game.StateMachine
 {
     public class LevelStateMachine
     {
         public LevelStateMachine(LevelStates levelStates)
         {
-            levelStates.BuyingGameSquareState.LevelStateMachine = this;
+            levelStates.BuyingGameSquareState.StateMachine = this;
+            levelStates.StartLevelState.StateMachine = this;
+            levelStates.GoingGameState.StateMachine = this;
             
-            _levelStates = new Dictionary<Type, ILevelState>()
+            _levelStates = new Dictionary<Type, LevelState>()
             {
                 {typeof(StartLevelState), levelStates.StartLevelState},
                 {typeof(GoingGameState), levelStates.GoingGameState},
@@ -18,13 +20,13 @@ namespace Scripts.Game.FinalStateMachine
         }
 
 
-        private Dictionary<Type, ILevelState> _levelStates;
-        private ILevelState _currentLevelState;
+        private Dictionary<Type, LevelState> _levelStates;
+        private LevelState _currentLevelState;
 
 
-        public void EnterIn<TState>() where TState : ILevelState
+        public void EnterIn<TState>() where TState : LevelState
         {
-            if(_levelStates.TryGetValue(typeof(TState), out ILevelState state))
+            if(_levelStates.TryGetValue(typeof(TState), out LevelState state))
             {
                 _currentLevelState?.ExitFromState();
                 _currentLevelState = state;
