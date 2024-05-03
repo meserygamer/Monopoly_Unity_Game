@@ -11,6 +11,7 @@ namespace Scripts.Zenject.ZenjectInstallers
             Container.Bind<PlayerMovementService>().FromNew().AsSingle();
             Container.Bind<PlayersMovesTurnService>().FromNew().AsSingle();
             Container.Bind<BankingService>().FromNew().AsSingle();
+            Container.Bind<RealEstatePurchaseService>().FromNew().AsSingle();
         }
     }
 }

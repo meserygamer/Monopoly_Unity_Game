@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Scripts.Game.Model.GameField;
 using Scripts.Game.Model.Player;
 
@@ -34,7 +35,7 @@ namespace Scripts.Game.Services
         private PlayerRepository _playerRepository;
 
 
-        public event Action<int, uint?, uint> PlayerPositionChanged;
+        public event Action<PlayerInfo, int, uint?, uint> PlayerPositionChanged;
 
 
         public List<PlayerPosition> PlayersPositions { get; } = new List<PlayerPosition>();
@@ -47,9 +48,10 @@ namespace Scripts.Game.Services
         {
             PlayerPosition playerPosition = PlayersPositions.Find(a => a.Player == player);
             playerPosition.PositionOnGameBoard = GetNewPlayerPosition(playerPosition, passedGameSquaresCount);
-            PlayerPositionChanged?.Invoke(PlayersPositions.IndexOf(playerPosition), passedGameSquaresCount, playerPosition.PositionOnGameBoard);
+            PlayerPositionChanged?.Invoke(player, PlayersPositions.IndexOf(playerPosition), passedGameSquaresCount, playerPosition.PositionOnGameBoard);
         }
-        public void MovePlayer(int playerID, uint passedGameSquaresCount) => MovePlayer(PlayersPositions[playerID].Player, passedGameSquaresCount);
+
+        public uint? GetPlayerPosition(PlayerInfo playerInfo) => PlayersPositions.Where(a => a.Player == playerInfo).FirstOrDefault()?.PositionOnGameBoard;
 
         private void GeneratePositionsForNewPlayers(PlayerInfo[] playerInfos)
         {
@@ -57,7 +59,7 @@ namespace Scripts.Game.Services
             for(int i = 0; i < playerInfos.Length; i++)
             {
                 PlayersPositions.Add(new PlayerPosition { Player = playerInfos[i], PositionOnGameBoard = 0 });
-                PlayerPositionChanged?.Invoke(i, null, 0);
+                PlayerPositionChanged?.Invoke(playerInfos[i], i, null, 0);
             }
         }
 

@@ -1,3 +1,4 @@
+using Scripts.Game.Model.Player;
 using Scripts.Game.Services;
 using Scripts.Game.View;
 
@@ -33,6 +34,6 @@ namespace Scripts.Game.Presenter
             }
         }
 
-        private void PlayerPositionChangedHandler(int playerID, uint? passedGameSquaresCount, uint newPosition) => View?.MovePlayersPawn(playerID, newPosition);
+        private void PlayerPositionChangedHandler(PlayerInfo playerInfo, int playerID, uint? passedGameSquaresCount, uint newPosition) => View?.MovePlayersPawn(playerID, newPosition);
     }
 }

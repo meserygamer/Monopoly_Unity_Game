@@ -13,6 +13,7 @@ namespace Scripts.Zenject.ZenjectInstallers
             Container.Bind<GameBoardInfo>().FromFactory<GameBoardInfoFactory>().AsSingle();
             Container.Bind<PlayerRepository>().FromNew().AsSingle();
             Container.Bind<AwardingRewardsMaster>().FromNew().AsSingle().NonLazy();
+            Container.Bind<RealEstateBuyingMaster>().FromNew().AsSingle().NonLazy();
         }
     }
 

@@ -14,12 +14,16 @@ namespace Scripts.Game.Services
         private BankingService _bankingService;
 
 
-        public void BuyTangibleAsset(PlayerInfo playerInfo, TangibleAssetSquare tangibleAssetSquare)
+        public bool BuySquare(PlayerInfo player, OwnableSquare ownableSquare)
         {
-            if(playerInfo is null || tangibleAssetSquare is null)
-                return;
+            if(player is null || ownableSquare is null)
+                return false;
             
-
+            if(!_bankingService.TakePlayerMoneyIfEnought(player, ownableSquare.Cost))
+                return false;
+            
+            ownableSquare.ChangeOwner(player);
+            return true;
         }
     }
 }

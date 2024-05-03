@@ -10,6 +10,7 @@ namespace Scripts.Zenject.ZenjectInstallers
             Container.Bind<PlayerPositionShowerPresenter>().FromNew().AsTransient();
             Container.Bind<PlayersMovesTurnPresenter>().FromNew().AsTransient();
             Container.Bind<PlayersStatisticsShowerPresenter>().FromNew().AsTransient().NonLazy();
+            Container.Bind<BuyingDialogPresenter>().FromNew().AsTransient().NonLazy();
         }
     }
 }

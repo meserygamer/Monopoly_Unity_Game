@@ -5,6 +5,6 @@ namespace Scripts.Game.Model.GameField.GameSquare
     /// </summary>
     public abstract class GameSquareBase
     {
-
+        public virtual string Label { get; } = "Игровая клетка";
     }
 }

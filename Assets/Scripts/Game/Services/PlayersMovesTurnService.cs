@@ -8,10 +8,10 @@ namespace Scripts.Game.Services
         public PlayersMovesTurnService(PlayerRepository playerRepository, DiceRollService diceRollService, PlayerMovementService playerMovementService)
         {
             _playerRepository = playerRepository;
-            _movesTurn = new Queue<PlayerInfo>(_playerRepository.PlayersInfo);
-            _playerRepository.PlayersInfoRegenerated += PlayersInfoRegeneratedHandler;
             _diceRollService = diceRollService;
             _playerMovementService = playerMovementService;
+            _movesTurn = new Queue<PlayerInfo>(_playerRepository.PlayersInfo);
+            _playerRepository.PlayersInfoRegenerated += PlayersInfoRegeneratedHandler;
         }
 
 
@@ -22,13 +22,16 @@ namespace Scripts.Game.Services
         public Queue<PlayerInfo> _movesTurn;
 
 
+        public PlayerInfo MakingTurnPlayer { get; private set; }
+
+
         public void DoNextMove()
         {
             if (_movesTurn.Count == 0)
                 _movesTurn = new Queue<PlayerInfo>(_playerRepository.PlayersInfo);
-            PlayerInfo playerWhoThrowsDice = _movesTurn.Dequeue();
-            DiceRoll playersDiceRoll = _diceRollService.SimulatePlayerRollDice(playerWhoThrowsDice);
-            _playerMovementService.MovePlayer(playerWhoThrowsDice, playersDiceRoll.SumCameUpNumbers);
+            MakingTurnPlayer = _movesTurn.Dequeue();
+            DiceRoll playersDiceRoll = _diceRollService.SimulatePlayerRollDice(MakingTurnPlayer);
+            _playerMovementService.MovePlayer(MakingTurnPlayer, playersDiceRoll.SumCameUpNumbers);
         }
 
         private void PlayersInfoRegeneratedHandler()

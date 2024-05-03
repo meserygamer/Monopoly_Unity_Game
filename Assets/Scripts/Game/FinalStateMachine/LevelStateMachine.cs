@@ -1,17 +1,19 @@
 using System;
 using System.Collections.Generic;
-using Scripts.Game.Model.Player;
 
 namespace Scripts.Game.FinalStateMachine
 {
     public class LevelStateMachine
     {
-        public LevelStateMachine(PlayerRepository playerRepository)
+        public LevelStateMachine(LevelStates levelStates)
         {
+            levelStates.BuyingGameSquareState.LevelStateMachine = this;
+            
             _levelStates = new Dictionary<Type, ILevelState>()
             {
-                {typeof(StartLevelState), new StartLevelState(playerRepository)},
-                {typeof(GoingGameState), new GoingGameState()}
+                {typeof(StartLevelState), levelStates.StartLevelState},
+                {typeof(GoingGameState), levelStates.GoingGameState},
+                {typeof(BuyingGameSquareState), levelStates.BuyingGameSquareState}
             };
         }
 

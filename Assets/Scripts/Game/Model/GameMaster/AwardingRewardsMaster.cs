@@ -1,15 +1,15 @@
 using Scripts.Game.Model.GameField;
+using Scripts.Game.Model.Player;
 using Scripts.Game.Services;
 
 namespace Scripts.Game.Model.GameMaster
 {
     public class AwardingRewardsMaster
     {
-        public AwardingRewardsMaster(PlayerMovementService playerMovementService, BankingService bankingService, GameBoardInfo gameBoardInfo)
+        public AwardingRewardsMaster(PlayerMovementService playerMovementService, BankingService bankingService)
         {
             _playerMovementService = playerMovementService;
             _bankingService = bankingService;
-            _gameBoardInfo = gameBoardInfo;
             _playerMovementService.PlayerPositionChanged += PlayerPositionChangedHandler;
         }
 
@@ -25,19 +25,18 @@ namespace Scripts.Game.Model.GameMaster
 
         private PlayerMovementService _playerMovementService;
         private BankingService _bankingService;
-        private GameBoardInfo _gameBoardInfo;
 
 
-        private void PlayerPositionChangedHandler(int playerID, uint? oldPosition, uint newPosition) => RewardForCompletingCircle(playerID, oldPosition, newPosition);
+        private void PlayerPositionChangedHandler(PlayerInfo player, int playerID, uint? passedGameSquaresCount, uint newPosition) => RewardForCompletingCircle(player, passedGameSquaresCount, newPosition);
 
 
-        private void RewardForCompletingCircle(int playerID, uint? passedGameSquaresCount, uint newPosition)
+        private void RewardForCompletingCircle(PlayerInfo player, uint? passedGameSquaresCount, uint newPosition)
         {
             if(passedGameSquaresCount is null)
                 return;
 
             if ((int)newPosition - (int)passedGameSquaresCount < 0)
-                _bankingService.GivePlayerMoney(playerID, CIRCLE_REWARD);
+                _bankingService.GivePlayerMoney(player, CIRCLE_REWARD);
         }
     }
 }
