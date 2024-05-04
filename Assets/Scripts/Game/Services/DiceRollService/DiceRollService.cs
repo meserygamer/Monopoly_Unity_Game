@@ -7,7 +7,7 @@ namespace Scripts.Game.Services
 {
     public class DiceRollService
     {
-        private readonly Dictionary<PlayerInfo, List<DiceRoll>> _rollHistory = 
+        public Dictionary<PlayerInfo, List<DiceRoll>> RollHistory { get; } = 
             new Dictionary<PlayerInfo, List<DiceRoll>>();
 
 
@@ -32,14 +32,14 @@ namespace Scripts.Game.Services
         {
             List<DiceRoll> _playerDiceRolls;
             Debug.Log("На кубиках  - " + diceRoll.SumCameUpNumbers);
-            if (_rollHistory.TryGetValue(player, out _playerDiceRolls))
+            if (RollHistory.TryGetValue(player, out _playerDiceRolls))
             {
                 _playerDiceRolls.Add(diceRoll);
             }
             else
             {
                 _playerDiceRolls = new List<DiceRoll>();
-                _rollHistory.Add(player, _playerDiceRolls);
+                RollHistory.Add(player, _playerDiceRolls);
             }
         }
     }
