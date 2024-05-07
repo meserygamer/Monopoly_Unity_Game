@@ -10,18 +10,22 @@ namespace Scripts.Game.Model.GameField.GameSquare
     /// </summary>
     public class TangibleAssetSquare : OwnableSquare
     {
-        public TangibleAssetSquare(QuestionSubtheme questionSubtheme, uint cost) : base(null, cost)
+        public TangibleAssetSquare(QuestionSubtheme questionSubtheme, uint cost, uint[] rentalCosts, uint[] constructionCosts) : base(null, cost)
         {
-            _questionSubtheme = questionSubtheme;
+            QuestionSubtheme = questionSubtheme;
+            RentalCosts = rentalCosts;
+            ConstructionCosts = constructionCosts;
         }
 
 
-        private readonly QuestionSubtheme _questionSubtheme;
+        public QuestionSubtheme QuestionSubtheme { get; }
 
+        public uint AssetLevel { get; private set; } = 0;                                          // 1 - один домик, 2 - два домика, 3 - три домика, 4 - четыре домика, 5 - отель
 
-        public uint AssetLevel { get; private set; } = 0;            // 1 - один домик, 2 - два домика, 3 - три домика, 4 - четыре домика, 5 - отель
+        public override string Label => "Тема - " + QuestionSubtheme.QuestionTheme.Title + " Подтема - " + QuestionSubtheme.Title;
 
-        public override string Label => "Тема - " + _questionSubtheme.QuestionTheme.Title + " Подтема - " + _questionSubtheme.Title;
+        public uint[] RentalCosts { get; }                                                         // Стоимости аренды на каждом из уровней
+        public uint[] ConstructionCosts { get; }                                                   // Стоимости строительства сооружений на клетке
 
 
         public void IncreaseAssetLevel()

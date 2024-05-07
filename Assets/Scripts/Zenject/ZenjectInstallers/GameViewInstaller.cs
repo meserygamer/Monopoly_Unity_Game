@@ -1,4 +1,5 @@
 using Scripts.Game.View;
+using Scripts.Game.View.BuyingDialog;
 using Zenject;
 
 namespace Scripts.Zenject.ZenjectInstallers

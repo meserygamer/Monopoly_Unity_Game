@@ -1,6 +1,7 @@
 using Scripts.Game.Model.GameField.GameSquare;
 using Scripts.Game.Model.GameMaster;
 using Scripts.Game.View;
+using Scripts.Game.View.BuyingDialog;
 
 namespace Scripts.Game.Presenter
 {
@@ -29,15 +30,10 @@ namespace Scripts.Game.Presenter
         private RealEstateBuyingMaster _realEstateBuyingMaster;
 
 
-        private void MakingTurnPlayerCanBuySquareHandler(OwnableSquare gameSquare)
-        {
-            _view.SetDialogText(gameSquare.Label, gameSquare.Cost);
-        }
+        private void MakingTurnPlayerCanBuySquareHandler(OwnableSquare gameSquare) => _view.SetDialogText(gameSquare);
 
-        private void PlayerPurchaseConfirmedHandler()
-        {
-            _realEstateBuyingMaster.BuyGameSquareByMakingTurnPlayer();
-        }
+
+        private void PlayerPurchaseConfirmedHandler() => _realEstateBuyingMaster.BuyGameSquareByMakingTurnPlayer();
 
         private void PlayerPurchaseCanceledHandler(){}
     }

@@ -2,6 +2,7 @@ using System;
 using Scripts.Game.Model.GameField.GameSquare;
 using Scripts.Game.Model.GameMaster;
 using Scripts.Game.View;
+using Scripts.Game.View.BuyingDialog;
 using UnityEngine;
 
 #nullable enable
