@@ -8,7 +8,8 @@ namespace Scripts.Game.View.BuyingDialog
 {
     public class BuyingDialog : MonoBehaviour
     {
-        [SerializeField] private TemporaryAssetInfoShower _temporaryAssetInfoShower;
+        [SerializeField] private InfrastructureInfoShower _waterStationInfoShower;
+        [SerializeField] private InfrastructureInfoShower _lightStationInfoShower;
         [SerializeField] private TangibleAssetInfoShower _tangibleAssetInfoShower;
         [SerializeField] private RailroadInfoShower _railroadInfoShower;
 
@@ -46,7 +47,8 @@ namespace Scripts.Game.View.BuyingDialog
             _assetsWithdrawalMethods = new Dictionary<Type, AssetInfoShower>
             {
                 { typeof(TangibleAssetSquare), _tangibleAssetInfoShower },
-                { typeof(InfrastructureGameSquare), _temporaryAssetInfoShower },
+                { typeof(WaterStationGameSquare), _waterStationInfoShower },
+                { typeof(LightStationGameSquare), _lightStationInfoShower },
                 { typeof(RailRoadGameSquare), _railroadInfoShower }
             };
         }

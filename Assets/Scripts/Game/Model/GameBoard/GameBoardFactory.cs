@@ -73,7 +73,7 @@ namespace Scripts.Game.GameField
                     new uint[] { 100, 100}
                 )
             );
-            gameBoardInfo.GameSquares.Add(new InfrastructureGameSquare("Электричество", 150));
+            gameBoardInfo.GameSquares.Add(new LightStationGameSquare("Электричество", 150));
             gameBoardInfo.GameSquares.Add(
                 new TangibleAssetSquare
                 (
@@ -172,7 +172,7 @@ namespace Scripts.Game.GameField
                     new uint[] { 150, 150}
                 )
             );
-            gameBoardInfo.GameSquares.Add(new InfrastructureGameSquare("Водопровод", 150));
+            gameBoardInfo.GameSquares.Add(new WaterStationGameSquare("Водопровод", 150));
             gameBoardInfo.GameSquares.Add(
                 new TangibleAssetSquare
                 (
