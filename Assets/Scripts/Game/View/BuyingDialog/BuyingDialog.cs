@@ -10,6 +10,7 @@ namespace Scripts.Game.View.BuyingDialog
     {
         [SerializeField] private TemporaryAssetInfoShower _temporaryAssetInfoShower;
         [SerializeField] private TangibleAssetInfoShower _tangibleAssetInfoShower;
+        [SerializeField] private RailroadInfoShower _railroadInfoShower;
 
         private Dictionary<Type, AssetInfoShower> _assetsWithdrawalMethods;
 
@@ -46,7 +47,7 @@ namespace Scripts.Game.View.BuyingDialog
             {
                 { typeof(TangibleAssetSquare), _tangibleAssetInfoShower },
                 { typeof(InfrastructureGameSquare), _temporaryAssetInfoShower },
-                { typeof(RailRoadGameSquare), _temporaryAssetInfoShower }
+                { typeof(RailRoadGameSquare), _railroadInfoShower }
             };
         }
     }
