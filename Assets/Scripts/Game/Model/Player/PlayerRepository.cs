@@ -31,6 +31,8 @@ namespace Scripts.Game.Model.Player
             PlayersInfoRegenerated?.Invoke();
         }
 
+        public int GetPlayerID(PlayerInfo player) => PlayersInfo.IndexOf(player);
+
         private void PlayerNameChangedHandler(PlayerInfo player)
         {
             int playerIndex = PlayersInfo.FindIndex(p => p == player);

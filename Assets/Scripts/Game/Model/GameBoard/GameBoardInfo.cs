@@ -8,6 +8,9 @@ namespace Scripts.Game.Model.GameField
     /// </summary>
     public sealed class GameBoardInfo
     {
-        public List<GameSquareBase> GameSquares { get; } = new List<GameSquareBase>();
+        public List<GameSquareInfoBase> GameSquares { get; } = new List<GameSquareInfoBase>();
+
+
+        public int GetGameSquareID(GameSquareInfoBase gameSquareInfoBase) => GameSquares.IndexOf(gameSquareInfoBase);
     }
 }

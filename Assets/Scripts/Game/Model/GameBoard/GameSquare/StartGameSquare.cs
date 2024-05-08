@@ -3,7 +3,7 @@ namespace Scripts.Game.Model.GameField.GameSquare
     /// <summary>
     /// Стартовый квадрат игрового поля
     /// </summary>
-    public class StartGameSquare : GameSquareBase
+    public class StartGameSquare : GameSquareInfoBase
     {
     }
 }

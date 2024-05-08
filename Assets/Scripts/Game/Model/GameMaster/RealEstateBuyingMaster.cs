@@ -31,13 +31,15 @@ namespace Scripts.Game.Model.GameMaster
 
         public event Action<OwnableSquare> MakingTurnPlayerCanBuySquare;
 
+        public event Action<PlayerInfo, OwnableSquare> PlayerBuyedSquare;
+
 
         public bool IsMarkingTurnPlayerCanBuySquare { get; set; } = false;
 
 
         private void PlayerPositionChangedHandler(PlayerInfo player, int playerID, uint? passedGameSquaresCount, uint newPosition)
         {
-            GameSquareBase gameSquare = _gameBoardInfo.GameSquares[Convert.ToInt32(newPosition)];
+            GameSquareInfoBase gameSquare = _gameBoardInfo.GameSquares[Convert.ToInt32(newPosition)];
             if(CanGameSquareBeBought(gameSquare) && CanPlayerBuyGameSquare(_playersMovesTurnService.MakingTurnPlayer, (OwnableSquare)gameSquare))
             {
                 IsMarkingTurnPlayerCanBuySquare = true;
@@ -48,7 +50,7 @@ namespace Scripts.Game.Model.GameMaster
         }
 
 
-        private bool CanGameSquareBeBought(GameSquareBase gameSquare)
+        private bool CanGameSquareBeBought(GameSquareInfoBase gameSquare)
         {
             if(gameSquare is OwnableSquare ownableSquare && ownableSquare.Owner is null)
                 return true;
@@ -66,14 +68,20 @@ namespace Scripts.Game.Model.GameMaster
         {
             if(!IsMarkingTurnPlayerCanBuySquare)
                 return;
+                
             PlayerInfo player = _playersMovesTurnService.MakingTurnPlayer;
             uint? playerPosition = _playerMovementService.GetPlayerPosition(player);
+
             if(playerPosition is null)
                 throw new ArgumentOutOfRangeException("Пользователя покупающего недвижимость несуществует на игровой доске");
+
             OwnableSquare? ownableSquare = _gameBoardInfo.GameSquares[Convert.ToInt32((uint)playerPosition)] as OwnableSquare;
+
             if(ownableSquare is null)
                 throw new ArgumentOutOfRangeException("Покупаемое поле недоступно для покупки");
-            _realEstatePurchaseService.BuySquare(player, ownableSquare);
+
+            if(_realEstatePurchaseService.BuySquare(player, ownableSquare))
+                PlayerBuyedSquare?.Invoke(player, ownableSquare);
         }
     }
 }

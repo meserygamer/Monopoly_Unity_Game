@@ -1,6 +1,6 @@
 namespace Scripts.Game.Model.GameField.GameSquare
 {
-    public class ChanceGameSquare : GameSquareBase
+    public class ChanceGameSquare : GameSquareInfoBase
     {
         
     }

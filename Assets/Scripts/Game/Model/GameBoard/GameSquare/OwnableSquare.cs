@@ -7,7 +7,7 @@ namespace Scripts.Game.Model.GameField.GameSquare
     /// <summary>
     /// Имущество которым можно владеть
     /// </summary>
-    public abstract class OwnableSquare : GameSquareBase
+    public abstract class OwnableSquare : GameSquareInfoBase
     {
         public OwnableSquare(PlayerInfo? defaultOwner, uint cost)
         {
