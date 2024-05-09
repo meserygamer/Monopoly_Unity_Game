@@ -1,4 +1,3 @@
-using Scripts.Game.Model.Player;
 using Scripts.Game.Model.Questions;
 
 #nullable enable
@@ -8,7 +7,7 @@ namespace Scripts.Game.Model.GameField.GameSquare
     /// <summary>
     /// Квадрат игрового поля с активом
     /// </summary>
-    public class TangibleAssetSquare : OwnableSquare
+    public sealed class TangibleAssetSquare : OwnableSquare
     {
         public TangibleAssetSquare(QuestionSubtheme questionSubtheme, uint cost, uint[] rentalCosts, uint[] constructionCosts) : base(null, cost)
         {
