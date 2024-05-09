@@ -21,5 +21,10 @@ namespace Scripts.Game.Services
             return true;
         }
 
+        public void TransferMoneyBetweenPlayers(PlayerInfo from, PlayerInfo to, uint TransferMoneyAmount)
+        {
+            GivePlayerMoney(to, TransferMoneyAmount);
+            TakePlayerMoney(from, TransferMoneyAmount);
+        }
     }
 }

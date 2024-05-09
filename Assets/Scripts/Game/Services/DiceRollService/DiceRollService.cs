@@ -24,10 +24,21 @@ namespace Scripts.Game.Services
             return diceRoll;
         }
 
+        public DiceRoll SimulatePlayerRollDiceWithoutHistory()
+        {
+            DiceRoll diceRoll = new DiceRoll()
+            {
+                FirstCameUpNumber = RollDice(),
+                SecondCameUpNumber = RollDice()
+            };
+            return diceRoll;
+        }
+
         private uint RollDice()
         {
             return Convert.ToUInt32(new System.Random().Next(1, 7));
         }
+
         private void AddDiceRollToHistory(PlayerInfo player, DiceRoll diceRoll)
         {
             List<DiceRoll> _playerDiceRolls;

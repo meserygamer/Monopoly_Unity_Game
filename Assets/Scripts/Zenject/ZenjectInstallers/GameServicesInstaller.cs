@@ -1,4 +1,5 @@
 using Scripts.Game.Services;
+using Scripts.Game.Services.CostOfRentServices;
 using Zenject;
 
 namespace Scripts.Zenject.ZenjectInstallers
@@ -12,6 +13,10 @@ namespace Scripts.Zenject.ZenjectInstallers
             Container.Bind<PlayersMovesTurnService>().FromNew().AsSingle();
             Container.Bind<BankingService>().FromNew().AsSingle();
             Container.Bind<RealEstatePurchaseService>().FromNew().AsSingle();
+
+            Container.Bind<InfrastructureRentCostCalculatorService>().FromNew().AsSingle();
+            Container.Bind<RailroadRentCostCalculatorService>().FromNew().AsSingle();
+            Container.Bind<TangibleAssetRentCostCalculatorService>().FromNew().AsSingle();
         }
     }
 }

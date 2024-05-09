@@ -19,13 +19,5 @@ namespace Scripts.Game.Model.GameField.GameSquare
 
 
         public override string Label => _label;
-
-
-        public override void ChangeOwner(PlayerInfo newOwner)
-        {
-            if(newOwner == null)
-                return;
-            Owner = newOwner;
-        }
     }
 }

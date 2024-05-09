@@ -40,12 +40,5 @@ namespace Scripts.Game.Model.GameField.GameSquare
                 return;
             AssetLevel--;
         }
-
-        public override void ChangeOwner(PlayerInfo newOwner)
-        {
-            if(newOwner == null)
-                return;
-            Owner = newOwner;
-        }
     }
 }

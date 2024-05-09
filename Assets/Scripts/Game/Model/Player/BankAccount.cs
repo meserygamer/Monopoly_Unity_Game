@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Scripts.Game.Model.GameField.GameSquare;
 
 namespace Scripts.Game.Model.Player
 {
@@ -19,5 +21,7 @@ namespace Scripts.Game.Model.Player
                 BankAccountMoneyAmountChanged?.Invoke(this);
             }
         }
+
+        public HashSet<OwnableSquare> GameSquaresInPossession { get; } = new HashSet<OwnableSquare>();
     }
 }

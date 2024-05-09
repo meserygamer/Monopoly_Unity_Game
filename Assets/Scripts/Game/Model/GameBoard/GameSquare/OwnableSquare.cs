@@ -21,6 +21,12 @@ namespace Scripts.Game.Model.GameField.GameSquare
         public uint Cost { get; }
 
 
-        public abstract void ChangeOwner(PlayerInfo newOwner);
+        public virtual void ChangeOwner(PlayerInfo newOwner)
+        {
+            if(newOwner == null)
+                return;
+            newOwner.BankAccount.GameSquaresInPossession.Add(this);
+            Owner = newOwner;
+        }
     }
 }
