@@ -12,6 +12,7 @@ namespace Scripts.Zenject.ZenjectInstallers
             Container.Bind<PlayersStatisticsShower>().FromComponentInHierarchy().AsSingle();
             Container.Bind<BuyingDialog>().FromComponentInHierarchy().AsSingle();
             Container.Bind<GameSquareOwnershipVisualizerCoordinator>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<ConstructionModeButton>().FromComponentInHierarchy().AsSingle();
         }
     }
 }

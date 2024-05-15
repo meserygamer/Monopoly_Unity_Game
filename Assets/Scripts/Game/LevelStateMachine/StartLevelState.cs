@@ -18,7 +18,7 @@ namespace Scripts.Game.StateMachine
         {
             Application.targetFrameRate = 90;
             _playerRepository.GeneratePlayers(4);
-            base.StateMachine.EnterIn<GoingGameState>();
+            base.StateMachine.EnterIn<PlayerMakingTurnState>();
         }
 
         public override void ExitFromState(){}

@@ -1,3 +1,4 @@
+using System;
 using Scripts.Game.Model.Questions;
 
 #nullable enable
@@ -17,9 +18,29 @@ namespace Scripts.Game.Model.GameField.GameSquare
         }
 
 
+        public uint MAX_GAME_SQUARE_LEVEL = 5;
+        public uint MIN_GAME_SQUARE_LEVEL = 0;
+
+
+        private uint _assetLevel = 0;                                                               // 1 - один домик, 2 - два домика, 3 - три домика, 4 - четыре домика, 5 - отель
+
+
+        public event Action<uint> AssetLevelChanged;
+
+
         public QuestionSubtheme QuestionSubtheme { get; }
 
-        public uint AssetLevel { get; private set; } = 0;                                          // 1 - один домик, 2 - два домика, 3 - три домика, 4 - четыре домика, 5 - отель
+        public uint AssetLevel 
+        {
+            get => _assetLevel;
+            private set
+            {
+                _assetLevel = value;
+                AssetLevelChanged?.Invoke(value);
+            }
+        }                                         
+
+        public bool IsReachedMaximumLevel => AssetLevel == MAX_GAME_SQUARE_LEVEL;
 
         public override string Label => "Тема - " + QuestionSubtheme.QuestionTheme.Title + " Подтема - " + QuestionSubtheme.Title;
 
@@ -27,17 +48,19 @@ namespace Scripts.Game.Model.GameField.GameSquare
         public uint[] ConstructionCosts { get; }                                                   // Стоимости строительства сооружений на клетке
 
 
-        public void IncreaseAssetLevel()
+        public bool IncreaseAssetLevel()
         {
-            if(AssetLevel == 5)
-                return;
+            if(IsReachedMaximumLevel)
+                return false;
             AssetLevel++;
+            return true;
         }
-        public void DecreaseAssetLevel()
+        public bool DecreaseAssetLevel()
         {
-            if(AssetLevel == 0)
-                return;
+            if(AssetLevel == MIN_GAME_SQUARE_LEVEL)
+                return false;
             AssetLevel--;
+            return true;
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Scripts
         }
 
 
-        private void Update()
+        private void LateUpdate()
         {
             float rotationVector = _playerInput.CameraControl.CameraRotate.ReadValue<float>();
             transform.Rotate(Vector3.up, _rotationSpeed * Time.deltaTime * -rotationVector);

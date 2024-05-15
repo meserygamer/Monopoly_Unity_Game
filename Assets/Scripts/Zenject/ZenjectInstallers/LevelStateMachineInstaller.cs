@@ -8,7 +8,7 @@ namespace Scripts.Zenject.ZenjectInstallers
         public override void InstallBindings()
         {
             Container.Bind<LevelStateMachine>().FromNew().AsSingle();
-            Container.Bind<GoingGameState>().FromNew().AsSingle();
+            Container.Bind<PlayerMakingTurnState>().FromNew().AsSingle();
             Container.Bind<StartLevelState>().FromNew().AsSingle();
             Container.Bind<BuyingGameSquareState>().FromNew().AsSingle();
             Container.Bind<LevelStates>().FromFactory<LevelStatesFactory>().AsSingle();
@@ -18,7 +18,7 @@ namespace Scripts.Zenject.ZenjectInstallers
     public class LevelStatesFactory : IFactory<LevelStates>
     {
         public LevelStatesFactory(  StartLevelState startLevelState,
-                                    GoingGameState goingGameState,
+                                    PlayerMakingTurnState goingGameState,
                                     BuyingGameSquareState buyingGameSquareState  )
         {
             _startLevelState = startLevelState;
@@ -28,7 +28,7 @@ namespace Scripts.Zenject.ZenjectInstallers
 
 
         private StartLevelState _startLevelState;
-        private GoingGameState _goingGameState;
+        private PlayerMakingTurnState _goingGameState;
         private BuyingGameSquareState _buyingGameSquareState;
 
 
@@ -37,7 +37,7 @@ namespace Scripts.Zenject.ZenjectInstallers
             return new LevelStates()
             { 
                 StartLevelState = _startLevelState,
-                GoingGameState = _goingGameState,
+                PlayerMakingTurnState = _goingGameState,
                 BuyingGameSquareState = _buyingGameSquareState
             };
         }

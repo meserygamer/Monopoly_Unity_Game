@@ -3,9 +3,9 @@ using Scripts.Game.Model.GameMaster;
 
 namespace Scripts.Game.StateMachine
 {
-    public class GoingGameState : LevelState
+    public class PlayerMakingTurnState : LevelState
     {
-        public GoingGameState(RealEstateBuyingMaster realEstateBuyingMaster)
+        public PlayerMakingTurnState(RealEstateBuyingMaster realEstateBuyingMaster)
         {
             _realEstateBuyingMaster = realEstateBuyingMaster;
         }

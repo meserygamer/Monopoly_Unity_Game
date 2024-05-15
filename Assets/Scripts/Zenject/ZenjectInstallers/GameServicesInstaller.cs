@@ -13,6 +13,7 @@ namespace Scripts.Zenject.ZenjectInstallers
             Container.Bind<PlayersMovesTurnService>().FromNew().AsSingle();
             Container.Bind<BankingService>().FromNew().AsSingle();
             Container.Bind<RealEstatePurchaseService>().FromNew().AsSingle();
+            Container.Bind<ConstructionService>().FromNew().AsSingle();
 
             Container.Bind<InfrastructureRentCostCalculatorService>().FromNew().AsSingle();
             Container.Bind<RailroadRentCostCalculatorService>().FromNew().AsSingle();

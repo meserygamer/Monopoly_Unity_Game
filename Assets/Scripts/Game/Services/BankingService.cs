@@ -26,5 +26,7 @@ namespace Scripts.Game.Services
             GivePlayerMoney(to, TransferMoneyAmount);
             TakePlayerMoney(from, TransferMoneyAmount);
         }
+
+        public bool CanPlayerPayBill(PlayerInfo player, uint billSize) => player.BankAccount.MoneyAmount > (int)billSize;
     }
 }

@@ -1,7 +1,3 @@
-using System;
-using Scripts.Game.Model.GameField.GameSquare;
-using Scripts.Game.Model.GameMaster;
-using Scripts.Game.View;
 using Scripts.Game.View.BuyingDialog;
 using UnityEngine;
 
@@ -20,7 +16,7 @@ namespace Scripts.Game.StateMachine
         private BuyingDialog _buyingDialog;
 
 
-        private void BuyingDialogEndHandler() => base.StateMachine?.EnterIn<GoingGameState>();
+        private void BuyingDialogEndHandler() => base.StateMachine?.EnterIn<PlayerMakingTurnState>();
 
 
         public override void EnterInState()
