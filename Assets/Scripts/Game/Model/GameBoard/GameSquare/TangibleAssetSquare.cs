@@ -42,7 +42,7 @@ namespace Scripts.Game.Model.GameField.GameSquare
 
         public bool IsReachedMaximumLevel => AssetLevel == MAX_GAME_SQUARE_LEVEL;
 
-        public override string Label => "Тема - " + QuestionSubtheme.QuestionTheme.Title + " Подтема - " + QuestionSubtheme.Title;
+        public override string Label => QuestionSubtheme.QuestionTheme.Title + ".\n" + QuestionSubtheme.Title;
 
         public uint[] RentalCosts { get; }                                                         // Стоимости аренды на каждом из уровней
         public uint[] ConstructionCosts { get; }                                                   // Стоимости строительства сооружений на клетке
