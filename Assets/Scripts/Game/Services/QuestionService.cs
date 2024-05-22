@@ -72,6 +72,19 @@ namespace Scripts.Game.Services
             return FormRightAnswear(gameSquareExample);
         }
 
+        public bool IsRightAnswearOnQuestion(uint questionIndex)
+        {
+            if(questionIndex >= _questionHistory.Count)
+                throw new ArgumentException("Вопроса с таким индексом несуществует");
+            
+            if(_questionHistory[(int)questionIndex].Item3 is null)
+                return false;
+
+            if(FormRightAnswear(GetGameSquareExample(questionIndex)) == _questionHistory[(int)questionIndex].Item3)
+                return true;
+            return false;
+        }
+
         private string FormRightAnswear(GameSquareExample gameSquareExample)
         {
             StringBuilder rightAnswearBuilder = new StringBuilder("");

@@ -8,11 +8,15 @@ namespace Scripts.Game.Model.GameMaster
 {
     public sealed class QuestionMaster
     {
-        public QuestionMaster(PlayerMovementService playerMovementService, GameBoardInfo gameBoard, QuestionService questionService)
+        public QuestionMaster(  PlayerMovementService playerMovementService,
+                                GameBoardInfo gameBoard, 
+                                QuestionService questionService,
+                                RentPaymentMaster rentPaymentMaster    )
         {
             _playerMovementService = playerMovementService;
             _gameBoard = gameBoard;
             _questionService = questionService;
+            _rentPaymentMaster = rentPaymentMaster;
 
             _playerMovementService.PlayerPositionChanged += PlayerMovementService_PlayerPositionChanged;
         }
@@ -21,6 +25,9 @@ namespace Scripts.Game.Model.GameMaster
         private PlayerMovementService _playerMovementService;
         private GameBoardInfo _gameBoard;
         private QuestionService _questionService;
+        private RentPaymentMaster _rentPaymentMaster;
+
+        private uint? _lastQuestionIndex = null;
 
 
         public event Action<uint> PlayerQuestionWasGenerated;
@@ -35,8 +42,9 @@ namespace Scripts.Game.Model.GameMaster
             int questionIndex = _questionService.GenerateQuestionForPlayerOnGameSquare(player);
             if(questionIndex == -1)
                 return;
-                
-            PlayerQuestionWasGenerated.Invoke((uint)questionIndex);
+            
+            _lastQuestionIndex = (uint)questionIndex;
+            PlayerQuestionWasGenerated.Invoke((uint)_lastQuestionIndex);
         }
 
         private bool DoesPlayerHaveToPayRent(PlayerInfo player, GameSquareInfoBase gameSquareWherePlayerStands)
@@ -48,6 +56,14 @@ namespace Scripts.Game.Model.GameMaster
                 return false;
 
             return true;
+        }
+    
+        public void PayRentForQuestion()
+        {
+            if(_questionService.IsRightAnswearOnQuestion((uint)_lastQuestionIndex))
+                return;
+
+            _rentPaymentMaster.PayRentByMakingTurnPlayer();
         }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using Scripts.Game.Model.GameMaster;
 using Scripts.Game.Services;
 
@@ -5,7 +6,8 @@ namespace Scripts.Game.Presenter.QuestionDialog
 {
     public sealed class QuestionDialogPresenter
     {
-        public QuestionDialogPresenter(QuestionMaster questionMaster, QuestionService questionService)
+        public QuestionDialogPresenter(QuestionMaster questionMaster,
+                                       QuestionService questionService)
         {
             _questionMaster = questionMaster;
             _questionService = questionService;
@@ -23,10 +25,27 @@ namespace Scripts.Game.Presenter.QuestionDialog
         private QuestionMaster _questionMaster;
         private QuestionService _questionService;
 
+        private View.QuestionDialog.QuestionDialog _view;
 
-        public View.QuestionDialog.QuestionDialog View { get; set; }
+
+        public View.QuestionDialog.QuestionDialog View 
+        {
+            get => _view;
+            set
+            {
+                if(_view is not null)
+                    _view.QuestionWindowClosed -= QuestionWindowClosedHandler;
+
+                _view = value;
+
+                _view.QuestionWindowClosed += QuestionWindowClosedHandler;
+            }
+        }
 
         public uint? LastQuestionIndex { get; private set; } = null;
+
+
+        private void QuestionWindowClosedHandler() => _questionMaster.PayRentForQuestion();
 
 
         private void PlayerQuestionWasGeneratedHandler(uint questionIndex)

@@ -10,16 +10,18 @@ namespace Scripts.Game.Model.GameMaster
 {
     public sealed class RentPaymentMaster
     {
-        public RentPaymentMaster(   PlayerMovementService playerMovementService,
-                                    GameBoardInfo gameBoardInfo,
+        public RentPaymentMaster(   GameBoardInfo gameBoardInfo,
                                     BankingService bankingService,
+                                    PlayerMovementService playerMovementService,
+                                    PlayersMovesTurnService playersMovesTurnService,
                                     InfrastructureRentCostCalculatorService infrastructureRentCostCalculator,
                                     RailroadRentCostCalculatorService railroadRentCostCalculator,
                                     TangibleAssetRentCostCalculatorService tangibleAssetRentCostCalculator    )
         {
-            _playerMovementService = playerMovementService;
             _gameBoardInfo = gameBoardInfo;
             _bankingService = bankingService;
+            _playerMovementService = playerMovementService;
+            _playersMovesTurnService = playersMovesTurnService;
 
             _rentCostCalculators = new Dictionary<Type, IRentCostCalculator>() 
             {
@@ -28,28 +30,32 @@ namespace Scripts.Game.Model.GameMaster
                 { typeof(LightStationGameSquare), infrastructureRentCostCalculator },
                 { typeof(RailRoadGameSquare), railroadRentCostCalculator }
             };
-
-            _playerMovementService.PlayerPositionChanged += PlayerMovementService_PlayerPositionChanged;
         }
 
 
-        private readonly PlayerMovementService _playerMovementService;
         private readonly GameBoardInfo _gameBoardInfo;
         private readonly BankingService _bankingService;
+        private readonly PlayerMovementService _playerMovementService;
+        private readonly PlayersMovesTurnService _playersMovesTurnService;
 
         private readonly Dictionary<Type, IRentCostCalculator> _rentCostCalculators;
 
 
-        private void PlayerMovementService_PlayerPositionChanged(PlayerInfo player, int playerID, uint? passedGameSquaresCount, uint newPlayerPosition)
+        public void PayRentByMakingTurnPlayer()
         {
-            GameSquareInfoBase gameSquareWherePlayerStands = _gameBoardInfo.GameSquares[(int)newPlayerPosition];
+            int? playerPosition = (int?)_playerMovementService.GetPlayerPosition(_playersMovesTurnService.MakingTurnPlayer);
 
-            if(!DoesPlayerHaveToPayRent(player, gameSquareWherePlayerStands, out OwnableSquare ownableSquareWherePlayerStands))
+            if(playerPosition is null)
+                throw new ArgumentException("Игрок делающий ход отсутсвует на игровом поле");
+
+            GameSquareInfoBase gameSquareWherePlayerStands = _gameBoardInfo.GameSquares[(int)playerPosition];
+
+            if(!DoesPlayerHaveToPayRent(_playersMovesTurnService.MakingTurnPlayer, gameSquareWherePlayerStands, out OwnableSquare ownableSquareWherePlayerStands))
                 return;
 
             uint rentCost = CalculateCostOfRent(ownableSquareWherePlayerStands);
 
-            _bankingService.TransferMoneyBetweenPlayers(player, ownableSquareWherePlayerStands.Owner, rentCost);
+            _bankingService.TransferMoneyBetweenPlayers(_playersMovesTurnService.MakingTurnPlayer, ownableSquareWherePlayerStands.Owner, rentCost);
         }
 
         private bool DoesPlayerHaveToPayRent(PlayerInfo player, GameSquareInfoBase gameSquareWherePlayerStands, out OwnableSquare ownableSquare)
