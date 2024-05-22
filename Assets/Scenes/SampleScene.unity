@@ -11576,6 +11576,7 @@ GameObject:
   m_Component:
   - component: {fileID: 621382112}
   - component: {fileID: 621382113}
+  - component: {fileID: 621382114}
   m_Layer: 5
   m_Name: RightAnswear
   m_TagString: Untagged
@@ -11630,6 +11631,21 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &621382114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 621382111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8337e00fe8a973040b56f7fda74018e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rightAnswearColor: {r: 0.3772905, g: 1, b: 0.2971698, a: 0.6666667}
+  _failureAnswearColor: {r: 1, g: 0.19339621, b: 0.19339621, a: 0.6666667}
+  _answearOutputField: {fileID: 1494116154}
 --- !u!1001 &625301964
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12142,6 +12158,7 @@ GameObject:
   - component: {fileID: 660426382}
   - component: {fileID: 660426381}
   - component: {fileID: 660426380}
+  - component: {fileID: 660426384}
   m_Layer: 5
   m_Name: QuestionRentDialog
   m_TagString: Untagged
@@ -12232,6 +12249,22 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &660426384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 660426379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e532d91ac6381549bcbe74e1a419c32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _questionTextShower: {fileID: 725156598}
+  _questionDialogStopwatch: {fileID: 275212801}
+  _answearInputField: {fileID: 1967189421}
+  _rightAnswearInputField: {fileID: 621382114}
 --- !u!1001 &662027213
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13432,7 +13465,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 8
+  m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -14306,7 +14339,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 801385748}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 660426384}
+        m_TargetAssemblyTypeName: Scripts.Game.View.QuestionDialog.QuestionDialog,
+          Assembly-CSharp
+        m_MethodName: CloseQuestion
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &801385748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27834,7 +27880,7 @@ GameObject:
   - component: {fileID: 1494116155}
   - component: {fileID: 1494116154}
   m_Layer: 5
-  m_Name: PlayerAnswearInputField
+  m_Name: RightAnswearInputField
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34531,7 +34577,7 @@ GameObject:
   - component: {fileID: 1827434761}
   - component: {fileID: 1827434760}
   m_Layer: 5
-  m_Name: PlayerAnswearLabel
+  m_Name: RightAnswearLabel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35984,7 +36030,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1898836810}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 660426384}
+        m_TargetAssemblyTypeName: Scripts.Game.View.QuestionDialog.QuestionDialog,
+          Assembly-CSharp
+        m_MethodName: CheckAnswear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1898836810
 MonoBehaviour:
   m_ObjectHideFlags: 0

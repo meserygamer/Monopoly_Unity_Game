@@ -1,5 +1,6 @@
 using Scripts.Game.Presenter;
 using Scripts.Game.Presenter.ConstructionMode;
+using Scripts.Game.Presenter.QuestionDialog;
 using Scripts.Game.Presenter.TangibleAssetLevelVisualizer;
 using Zenject;
 
@@ -17,6 +18,7 @@ namespace Scripts.Zenject.ZenjectInstallers
             Container.Bind<PurchaseOpportunityVisualizerPresenter>().FromNew().AsTransient();
             Container.Bind<GameSquareConstructionBulderPresenter>().FromNew().AsTransient();
             Container.Bind<TangibleAssetLevelShowerPresenter>().FromNew().AsTransient();
+            Container.Bind<QuestionDialogPresenter>().FromNew().AsTransient();
         }
     }
 }

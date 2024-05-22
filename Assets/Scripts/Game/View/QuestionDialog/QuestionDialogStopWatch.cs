@@ -17,10 +17,7 @@ namespace Scripts.Game.View.QuestionDialog
         public bool IsTicking { get; private set; } = false;
 
 
-        public void Start()
-        {
-            StartStopwatch();
-        }
+        public event Action TimeIsOver;
 
 
         public bool SetTime(uint timeInSecond)
@@ -28,6 +25,7 @@ namespace Scripts.Game.View.QuestionDialog
             if(IsTicking)
                 return false;
             _timeOnStopWatchInSecond = timeInSecond;
+            _timerTimeTextShower.text = FormTimeOnStopwatchInString();
             return true;
         }
 
@@ -50,6 +48,15 @@ namespace Scripts.Game.View.QuestionDialog
             _stopwatch.Start();
         }
 
+        public void StopStopwatch()
+        {
+            if(IsTicking)
+            {
+                _stopwatch.Stop();
+                IsTicking = false;
+            }
+        }
+
         private void Stopwatch_Elapsed(object sender, ElapsedEventArgs e)
         {
             _timeOnStopWatchInSecond -= 1;
@@ -64,6 +71,7 @@ namespace Scripts.Game.View.QuestionDialog
             {
                 _stopwatch.Stop();
                 IsTicking = false;
+                TimeIsOver?.Invoke();
             }
         }
 

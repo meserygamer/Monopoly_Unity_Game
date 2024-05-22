@@ -10,12 +10,14 @@ namespace Scripts.Game.StateMachine
             levelStates.BuyingGameSquareState.StateMachine = this;
             levelStates.StartLevelState.StateMachine = this;
             levelStates.PlayerMakingTurnState.StateMachine = this;
+            levelStates.PlayerAnswearingQuestionState.StateMachine = this;
             
             _levelStates = new Dictionary<Type, LevelState>()
             {
                 {typeof(StartLevelState), levelStates.StartLevelState},
                 {typeof(PlayerMakingTurnState), levelStates.PlayerMakingTurnState},
-                {typeof(BuyingGameSquareState), levelStates.BuyingGameSquareState}
+                {typeof(BuyingGameSquareState), levelStates.BuyingGameSquareState},
+                {typeof(PlayerAnswearingQuestionState), levelStates.PlayerAnswearingQuestionState}
             };
         }
 

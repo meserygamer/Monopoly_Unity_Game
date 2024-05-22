@@ -11,6 +11,7 @@ namespace Scripts.Zenject.ZenjectInstallers
             Container.Bind<PlayerMakingTurnState>().FromNew().AsSingle();
             Container.Bind<StartLevelState>().FromNew().AsSingle();
             Container.Bind<BuyingGameSquareState>().FromNew().AsSingle();
+            Container.Bind<PlayerAnswearingQuestionState>().FromNew().AsSingle();
             Container.Bind<LevelStates>().FromFactory<LevelStatesFactory>().AsSingle();
         }
     }
@@ -19,17 +20,20 @@ namespace Scripts.Zenject.ZenjectInstallers
     {
         public LevelStatesFactory(  StartLevelState startLevelState,
                                     PlayerMakingTurnState goingGameState,
-                                    BuyingGameSquareState buyingGameSquareState  )
+                                    BuyingGameSquareState buyingGameSquareState,
+                                    PlayerAnswearingQuestionState playerAnswearingQuestionState )
         {
             _startLevelState = startLevelState;
             _goingGameState = goingGameState;
             _buyingGameSquareState = buyingGameSquareState;
+            _playerAnswearingState = playerAnswearingQuestionState;
         }
 
 
         private StartLevelState _startLevelState;
         private PlayerMakingTurnState _goingGameState;
         private BuyingGameSquareState _buyingGameSquareState;
+        private PlayerAnswearingQuestionState _playerAnswearingState;
 
 
         public LevelStates Create()
@@ -38,7 +42,8 @@ namespace Scripts.Zenject.ZenjectInstallers
             { 
                 StartLevelState = _startLevelState,
                 PlayerMakingTurnState = _goingGameState,
-                BuyingGameSquareState = _buyingGameSquareState
+                BuyingGameSquareState = _buyingGameSquareState,
+                PlayerAnswearingQuestionState = _playerAnswearingState
             };
         }
     }

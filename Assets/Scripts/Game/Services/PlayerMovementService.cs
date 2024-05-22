@@ -51,6 +51,14 @@ namespace Scripts.Game.Services
             PlayerPositionChanged?.Invoke(player, PlayersPositions.IndexOf(playerPosition), passedGameSquaresCount, playerPosition.PositionOnGameBoard);
         }
 
+        public void MovePlayerToDestinationPoint(PlayerInfo player, uint destinationPointID)
+        {
+            PlayerPosition playerPosition = PlayersPositions.Find(a => a.Player == player);
+            int passedGameSquaresCount = (int)destinationPointID - (int)playerPosition.PositionOnGameBoard;
+            playerPosition.PositionOnGameBoard = destinationPointID % (uint)_gameBoardInfo.GameSquares.Count;
+            PlayerPositionChanged?.Invoke(player, PlayersPositions.IndexOf(playerPosition), (uint)passedGameSquaresCount, playerPosition.PositionOnGameBoard);
+        }
+
         public uint? GetPlayerPosition(PlayerInfo playerInfo) => PlayersPositions.Where(a => a.Player == playerInfo).FirstOrDefault()?.PositionOnGameBoard;
 
         private void GeneratePositionsForNewPlayers(PlayerInfo[] playerInfos)

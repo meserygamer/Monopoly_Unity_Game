@@ -40,6 +40,10 @@ namespace Scripts.Game.Model.GameField.GameSquare
             }
         }                                         
 
+        public uint NumberOfHouses => (AssetLevel == 0 || AssetLevel == 5)? 0 : AssetLevel;
+
+        public uint NumberOfHotels => (AssetLevel == 5)? 1u : 0u;
+
         public bool IsReachedMaximumLevel => AssetLevel == MAX_GAME_SQUARE_LEVEL;
 
         public override string Label => QuestionSubtheme.QuestionTheme.Title + ".\n" + QuestionSubtheme.Title;

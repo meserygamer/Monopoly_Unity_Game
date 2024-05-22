@@ -22,10 +22,7 @@ namespace Scripts.Game.View.QuestionDialog
         public bool IsStringPrinting { get; private set; }
 
 
-        private void Start()
-        {
-            PrintString();
-        }
+        public event Action StringPrinted;
 
 
         public void SetStringToPrint(string stringToPrint)
@@ -60,6 +57,7 @@ namespace Scripts.Game.View.QuestionDialog
             {
                 _timer.Stop();
                 IsStringPrinting = false;
+                StringPrinted?.Invoke();
             }
             #if UNITY_EDITOR
                 Dispatcher.Enqueue( () => _textMeshProForPrinting.text += _stringToPrint[_currentSymbolIndex++]);
