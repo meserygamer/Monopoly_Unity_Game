@@ -8,9 +8,23 @@ namespace Scripts.Game.Model.GameField
     /// </summary>
     public sealed class GameBoardInfo
     {
-        public List<GameSquareInfoBase> GameSquares { get; } = new List<GameSquareInfoBase>();
+        public GameBoardInfo(int boardCapacity)
+        {
+            GameSquares = new List<GameSquareInfoBase>(boardCapacity);
+
+            InitializeGameSquares(boardCapacity);
+        }
+
+
+        public List<GameSquareInfoBase> GameSquares { get; }
 
 
         public int GetGameSquareID(GameSquareInfoBase gameSquareInfoBase) => GameSquares.IndexOf(gameSquareInfoBase);
+
+        private void InitializeGameSquares(int boardCapacity)
+        {
+            for(int i = 0; i < boardCapacity; i++)
+                GameSquares.Add(null);
+        }
     }
 }
