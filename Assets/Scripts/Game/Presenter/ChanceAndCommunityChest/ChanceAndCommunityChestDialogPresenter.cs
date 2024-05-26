@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Scripts.Game.Model.GameMaster;
 using Scripts.Game.Services.ChanceCardService;
 using Scripts.Game.Services.ChanceCardService.ChanceCards;
 using Scripts.Game.View.ChanceAndCommunityChest;
