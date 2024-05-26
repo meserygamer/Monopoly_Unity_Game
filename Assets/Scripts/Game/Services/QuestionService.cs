@@ -34,12 +34,12 @@ namespace Scripts.Game.Services
             if(playerPosition is null)
                 throw new ArgumentException("Игрока несуществует");
 
-            TangibleAssetSquare playersPlacement = _gameBoardInfo.GameSquares[(int)playerPosition] as TangibleAssetSquare;
+            OwnableSquare playersPlacement = _gameBoardInfo.GameSquares[(int)playerPosition] as OwnableSquare;
             if(playersPlacement is null)
                 return -1;
 
             int questionIndex = _questionHistory.Count;
-            _questionHistory.Add(new (player, playersPlacement.QuestionSubtheme.QuestionFactory?.Invoke(), null));
+            _questionHistory.Add(new (player, playersPlacement.GetGameSquareExample(), null));
             return questionIndex;
         }
 

@@ -11,13 +11,15 @@ namespace Scripts.Game.StateMachine
             levelStates.StartLevelState.StateMachine = this;
             levelStates.PlayerMakingTurnState.StateMachine = this;
             levelStates.PlayerAnswearingQuestionState.StateMachine = this;
+            levelStates.ChanceAndCommunityChestCardState.StateMachine = this;
             
             _levelStates = new Dictionary<Type, LevelState>()
             {
                 {typeof(StartLevelState), levelStates.StartLevelState},
                 {typeof(PlayerMakingTurnState), levelStates.PlayerMakingTurnState},
                 {typeof(BuyingGameSquareState), levelStates.BuyingGameSquareState},
-                {typeof(PlayerAnswearingQuestionState), levelStates.PlayerAnswearingQuestionState}
+                {typeof(PlayerAnswearingQuestionState), levelStates.PlayerAnswearingQuestionState},
+                {typeof(ChanceAndCommunityChestCardState), levelStates.ChanceAndCommunityChestCardState}
             };
         }
 

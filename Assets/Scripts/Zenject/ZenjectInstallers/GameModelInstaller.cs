@@ -16,6 +16,7 @@ namespace Scripts.Zenject.ZenjectInstallers
             Container.Bind<RealEstateBuyingMaster>().FromNew().AsSingle().NonLazy();
             Container.Bind<RentPaymentMaster>().FromNew().AsSingle().NonLazy();
             Container.Bind<QuestionMaster>().FromNew().AsSingle().NonLazy();
+            Container.Bind<ChanceAndCommunityChestMaster>().FromNew().AsSingle().NonLazy();
         }
     }
 

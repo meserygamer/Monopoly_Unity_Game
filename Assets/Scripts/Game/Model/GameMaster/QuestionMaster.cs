@@ -18,7 +18,7 @@ namespace Scripts.Game.Model.GameMaster
             _questionService = questionService;
             _rentPaymentMaster = rentPaymentMaster;
 
-            _playerMovementService.PlayerPositionChanged += PlayerMovementService_PlayerPositionChanged;
+            _playerMovementService.PlayerPositionChanged += PlayerPositionChangedHandler;
         }
 
 
@@ -33,7 +33,7 @@ namespace Scripts.Game.Model.GameMaster
         public event Action<uint> PlayerQuestionWasGenerated;
 
 
-        private void PlayerMovementService_PlayerPositionChanged(PlayerInfo player, int playerID, uint? passedGameSquaresCount, uint newPlayerPosition)
+        private void PlayerPositionChangedHandler(PlayerInfo player, int playerID, uint? passedGameSquaresCount, uint newPlayerPosition)
         {
             GameSquareInfoBase gameSquareWherePlayerStands = _gameBoard.GameSquares[(int)newPlayerPosition];
             if(!DoesPlayerHaveToPayRent(player, gameSquareWherePlayerStands))

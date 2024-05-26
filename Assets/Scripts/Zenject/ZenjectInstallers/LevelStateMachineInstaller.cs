@@ -12,6 +12,7 @@ namespace Scripts.Zenject.ZenjectInstallers
             Container.Bind<StartLevelState>().FromNew().AsSingle();
             Container.Bind<BuyingGameSquareState>().FromNew().AsSingle();
             Container.Bind<PlayerAnswearingQuestionState>().FromNew().AsSingle();
+            Container.Bind<ChanceAndCommunityChestCardState>().FromNew().AsSingle();
             Container.Bind<LevelStates>().FromFactory<LevelStatesFactory>().AsSingle();
         }
     }
@@ -21,12 +22,14 @@ namespace Scripts.Zenject.ZenjectInstallers
         public LevelStatesFactory(  StartLevelState startLevelState,
                                     PlayerMakingTurnState goingGameState,
                                     BuyingGameSquareState buyingGameSquareState,
-                                    PlayerAnswearingQuestionState playerAnswearingQuestionState )
+                                    PlayerAnswearingQuestionState playerAnswearingQuestionState,
+                                    ChanceAndCommunityChestCardState chanceAndCommunityChestCardState )
         {
             _startLevelState = startLevelState;
             _goingGameState = goingGameState;
             _buyingGameSquareState = buyingGameSquareState;
             _playerAnswearingState = playerAnswearingQuestionState;
+            _chanceAndCommunityChestCardState = chanceAndCommunityChestCardState;
         }
 
 
@@ -34,6 +37,7 @@ namespace Scripts.Zenject.ZenjectInstallers
         private PlayerMakingTurnState _goingGameState;
         private BuyingGameSquareState _buyingGameSquareState;
         private PlayerAnswearingQuestionState _playerAnswearingState;
+        private ChanceAndCommunityChestCardState _chanceAndCommunityChestCardState;
 
 
         public LevelStates Create()
@@ -43,7 +47,8 @@ namespace Scripts.Zenject.ZenjectInstallers
                 StartLevelState = _startLevelState,
                 PlayerMakingTurnState = _goingGameState,
                 BuyingGameSquareState = _buyingGameSquareState,
-                PlayerAnswearingQuestionState = _playerAnswearingState
+                PlayerAnswearingQuestionState = _playerAnswearingState,
+                ChanceAndCommunityChestCardState = _chanceAndCommunityChestCardState
             };
         }
     }

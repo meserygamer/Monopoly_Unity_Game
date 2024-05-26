@@ -1,11 +1,11 @@
+using System;
 using System.Collections.Generic;
 using Scripts.Game.Model.Player;
 using Scripts.Game.Services.ChanceCardService.ChanceCards;
-using UnityEngine;
 
 namespace Scripts.Game.Services.ChanceCardService
 {
-     public sealed class CommunityChestCardService : MonoBehaviour
+     public sealed class CommunityChestCardService : IEventCardProvider
     {
         public CommunityChestCardService(EventCard[] communityChestCards)
         {
@@ -18,9 +18,12 @@ namespace Scripts.Game.Services.ChanceCardService
         private List<(PlayerInfo, EventCard)> _communityChestCardHistory = new List<(PlayerInfo, EventCard)>();
 
 
+        public EventCard TakeEventCard(PlayerInfo playerInfo) => TakeCommunityChestCard(playerInfo);
+
+
         public EventCard TakeCommunityChestCard(PlayerInfo playerInfo)
         {
-            EventCard chanceCard = _communityChestCards[Random.Range(0, _communityChestCards.Length)];
+            EventCard chanceCard = _communityChestCards[new Random().Next(0, _communityChestCards.Length)];
             _communityChestCardHistory.Add((playerInfo, chanceCard));
             return chanceCard;
         }

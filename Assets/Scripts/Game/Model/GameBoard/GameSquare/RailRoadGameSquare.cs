@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Monopoly_Unity_Game_Server.Model;
 using Scripts.Game.Model.Questions;
 
 #nullable enable
@@ -25,5 +27,8 @@ namespace Scripts.Game.Model.GameField.GameSquare
         public override string Label => _label;
 
         public List<QuestionSubtheme> SubthemesInLine => _subthemesInLine;
+
+
+        public override GameSquareExample GetGameSquareExample() => SubthemesInLine[new Random().Next(0, SubthemesInLine.Count)].QuestionFactory.Invoke();
     }
 }

@@ -1,3 +1,4 @@
+using Monopoly_Unity_Game_Server.Model;
 using Scripts.Game.Model.Player;
 
 #nullable enable
@@ -28,5 +29,7 @@ namespace Scripts.Game.Model.GameField.GameSquare
             newOwner.BankAccount.GameSquaresInPossession.Add(this);
             Owner = newOwner;
         }
+
+        public abstract GameSquareExample GetGameSquareExample();
     }
 }

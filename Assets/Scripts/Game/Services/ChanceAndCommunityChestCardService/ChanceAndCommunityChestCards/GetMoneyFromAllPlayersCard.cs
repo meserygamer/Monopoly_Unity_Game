@@ -14,7 +14,7 @@ namespace Scripts.Game.Services.ChanceCardService.ChanceCards
             _playersMovesTurnService = playersMovesTurnService;
             _playerRepository = playerRepository;
 
-            base.ChanceCardText = cardText;
+            base.EventCardText = cardText;
             _moneyAmountFromSinglePlayer = moneyAmountFromSinglePlayer;
         }
 

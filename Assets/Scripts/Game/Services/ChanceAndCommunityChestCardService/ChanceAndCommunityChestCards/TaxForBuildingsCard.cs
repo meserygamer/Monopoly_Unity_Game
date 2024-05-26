@@ -14,7 +14,7 @@ namespace Scripts.Game.Services.ChanceCardService.ChanceCards
             _bankingService = bankingService;
             _playersMovesTurnService = playersMovesTurnService;
 
-            base.ChanceCardText = cardText;
+            base.EventCardText = cardText;
             _moneyAmountPerHouse = moneyAmountPerHouse;
             _moneyAmountPerHotel = moneyAmountPerHotel;
         }

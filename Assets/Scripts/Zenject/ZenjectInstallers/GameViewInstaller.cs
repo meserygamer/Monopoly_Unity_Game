@@ -1,5 +1,6 @@
 using Scripts.Game.View;
 using Scripts.Game.View.BuyingDialog;
+using Scripts.Game.View.ChanceAndCommunityChest;
 using Scripts.Game.View.PlayerOwnershipVisualizer;
 using Scripts.Game.View.QuestionDialog;
 using Zenject;
@@ -15,6 +16,7 @@ namespace Scripts.Zenject.ZenjectInstallers
             Container.Bind<GameSquareOwnershipVisualizerCoordinator>().FromComponentInHierarchy().AsSingle();
             Container.Bind<ConstructionModeButton>().FromComponentInHierarchy().AsSingle();
             Container.Bind<QuestionDialog>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<ChanceAndCommunityChestDialog>().FromComponentInHierarchy().AsSingle();
         }
     }
 }

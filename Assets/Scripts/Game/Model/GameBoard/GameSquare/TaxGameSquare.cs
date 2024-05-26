@@ -5,5 +5,12 @@ namespace Scripts.Game.Model.GameField.GameSquare
     /// </summary>
     public class TaxGameSquare : GameSquareInfoBase
     {
+        public TaxGameSquare(uint amountOfTax)
+        {
+            AmountOfTax = amountOfTax;
+        }
+
+
+        public uint AmountOfTax { get; }
     }
 }

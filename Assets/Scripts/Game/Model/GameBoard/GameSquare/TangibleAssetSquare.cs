@@ -1,4 +1,5 @@
 using System;
+using Monopoly_Unity_Game_Server.Model;
 using Scripts.Game.Model.Questions;
 
 #nullable enable
@@ -66,5 +67,7 @@ namespace Scripts.Game.Model.GameField.GameSquare
             AssetLevel--;
             return true;
         }
+
+        public override GameSquareExample GetGameSquareExample() => QuestionSubtheme.QuestionFactory.Invoke();
     }
 }

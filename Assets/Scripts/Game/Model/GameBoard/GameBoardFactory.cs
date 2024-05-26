@@ -301,9 +301,12 @@ namespace Scripts.Game.GameField
         {
             if(gameBoardInfo is null)
                 throw new ArgumentNullException(nameof(gameBoardInfo));
+
+            if(_questionSubthemesOnGameField is null)
+                InitializeQuestionsSubthemes();
             
-            gameBoardInfo.GameSquares[12] = new LightStationGameSquare("Электричество", 150);
-            gameBoardInfo.GameSquares[28] = new WaterStationGameSquare("Водопровод", 150);
+            gameBoardInfo.GameSquares[12] = new LightStationGameSquare("Электричество", 150, _questionSubthemesOnGameField!);
+            gameBoardInfo.GameSquares[28] = new WaterStationGameSquare("Водопровод", 150, _questionSubthemesOnGameField!);
         }
 
         private void InitializeRailRoads(GameBoardInfo gameBoardInfo)
@@ -332,8 +335,8 @@ namespace Scripts.Game.GameField
             if(gameBoardInfo is null)
                 throw new ArgumentNullException(nameof(gameBoardInfo));
 
-            gameBoardInfo.GameSquares[4] = new TaxGameSquare();
-            gameBoardInfo.GameSquares[38] = new TaxGameSquare();
+            gameBoardInfo.GameSquares[4] = new TaxGameSquare(200);
+            gameBoardInfo.GameSquares[38] = new TaxGameSquare(100);
         }
     }
 }

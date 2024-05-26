@@ -1,4 +1,5 @@
 using Scripts.Game.Presenter;
+using Scripts.Game.Presenter.ChanceAndCommunityChest;
 using Scripts.Game.Presenter.ConstructionMode;
 using Scripts.Game.Presenter.QuestionDialog;
 using Scripts.Game.Presenter.TangibleAssetLevelVisualizer;
@@ -19,6 +20,7 @@ namespace Scripts.Zenject.ZenjectInstallers
             Container.Bind<GameSquareConstructionBulderPresenter>().FromNew().AsTransient();
             Container.Bind<TangibleAssetLevelShowerPresenter>().FromNew().AsTransient();
             Container.Bind<QuestionDialogPresenter>().FromNew().AsTransient();
+            Container.Bind<ChanceAndCommunityChestDialogPresenter>().FromNew().AsTransient();
         }
     }
 }

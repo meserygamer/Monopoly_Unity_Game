@@ -6,5 +6,6 @@ namespace Scripts.Game.StateMachine
         public StartLevelState StartLevelState { get; set; }
         public BuyingGameSquareState BuyingGameSquareState { get; set; }
         public PlayerAnswearingQuestionState PlayerAnswearingQuestionState { get; set; }
+        public ChanceAndCommunityChestCardState ChanceAndCommunityChestCardState{ get; set; }
     }
 }

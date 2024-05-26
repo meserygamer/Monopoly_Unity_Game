@@ -8,7 +8,7 @@ namespace Scripts.Game.Services.ChanceCardService.ChanceCards
             _playerMovementService = playerMovementService;
             _playersMovesTurnService = playersMovesTurnService;
 
-            base.ChanceCardText = "Вернитесь на клетку \"Старт\"";
+            base.EventCardText = "Вернитесь на клетку \"Старт\"";
         }
 
 
