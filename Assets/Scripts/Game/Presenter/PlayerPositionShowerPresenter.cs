@@ -34,6 +34,12 @@ namespace Scripts.Game.Presenter
             }
         }
 
-        private void PlayerPositionChangedHandler(PlayerInfo playerInfo, int playerID, uint? passedGameSquaresCount, uint newPosition) => View?.MovePlayersPawn(playerID, newPosition);
+        private void PlayerPositionChangedHandler(PlayerInfo playerInfo, int playerID, uint? passedGameSquaresCount, uint newPosition) 
+        {
+            if(_playerMovementService.GameBoardJail.IsPlayerInJail(playerInfo))
+                View?.MovePlayerIntoJail(playerID, newPosition);
+            else
+                View?.MovePlayersPawn(playerID, newPosition);
+        }
     }
 }

@@ -27,9 +27,8 @@ namespace Scripts.Game.Services
 
         public void DoNextMove()
         {
-            if (_movesTurn.Count == 0)
-                _movesTurn = new Queue<PlayerInfo>(_playerRepository.PlayersInfo);
-            MakingTurnPlayer = _movesTurn.Dequeue();
+            MakingTurnPlayer = GetNextPlayer();
+
             DiceRoll playersDiceRoll = _diceRollService.SimulatePlayerRollDice(MakingTurnPlayer);
             _playerMovementService.MovePlayer(MakingTurnPlayer, playersDiceRoll.SumCameUpNumbers);
         }
@@ -37,6 +36,24 @@ namespace Scripts.Game.Services
         private void PlayersInfoRegeneratedHandler()
         {
             _movesTurn = new Queue<PlayerInfo>(_playerRepository.PlayersInfo);
+        }
+
+        private PlayerInfo GetNextPlayer()
+        {
+            PlayerInfo nextPlayer = null;
+            do
+            {
+                if (_movesTurn.Count == 0)
+                _movesTurn = new Queue<PlayerInfo>(_playerRepository.PlayersInfo);
+
+                nextPlayer = _movesTurn.Dequeue();
+                if(_playerMovementService.GameBoardJail.IsPlayerInJail(nextPlayer))
+                {
+                    _playerMovementService.GameBoardJail.ReduceMovesInJail(nextPlayer);
+                    nextPlayer = null;
+                }
+            } while (nextPlayer is null);
+            return nextPlayer;
         }
 
     }

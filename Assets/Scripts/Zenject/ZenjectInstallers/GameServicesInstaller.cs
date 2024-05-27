@@ -53,7 +53,7 @@ namespace Scripts.Zenject.ZenjectInstallers
             return new ChanceCardService(new EventCard[] 
             {
                 new GetMoneyFromBankCard("Вы заняли второе место на олимпиаде по математике, получите 40", 40, _bankingService, _playersMovesTurnService),
-                new BackToStartCard(_playerMovementService, _playersMovesTurnService),
+                //new BackToStartCard(_playerMovementService, _playersMovesTurnService),
                 new TaxForBuildingsCard("Сбор на обновление темы – заплатите 40 за каждый дом и 115 за каждый отель", 40, 115, _bankingService, _playersMovesTurnService),
                 new TakeMoneyToBankCard("Штраф за опоздание – заплатите 25", 25, _bankingService, _playersMovesTurnService),
                 new GetMoneyFromBankCard("Возврат долга – получите 150", 150, _bankingService, _playersMovesTurnService),

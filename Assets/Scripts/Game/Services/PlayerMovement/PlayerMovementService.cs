@@ -11,8 +11,10 @@ namespace Scripts.Game.Services
         public PlayerMovementService(PlayerRepository playerRepository, GameBoardInfo gameBoard)
         {
             _playerRepository = playerRepository;
-            playerRepository.PlayersInfoRegenerated += PlayersInfoRegeneratedHandler;
             _gameBoardInfo = gameBoard;
+            GameBoardJail = new GameBoardJail();
+
+            playerRepository.PlayersInfoRegenerated += PlayersInfoRegeneratedHandler;
         }
 
 
@@ -22,16 +24,11 @@ namespace Scripts.Game.Services
         }
 
 
-        public class PlayerPosition
-        {
-            public PlayerInfo Player {get; set;}
-
-            public uint PositionOnGameBoard {get; set;}
-        }
+        private const uint JAIL_SQUARE_INDEX = 10;
+        private const uint GO_TO_JAIL_SQUARE_INDEX = 30;
 
 
         private GameBoardInfo _gameBoardInfo;
-
         private PlayerRepository _playerRepository;
 
 
@@ -40,6 +37,8 @@ namespace Scripts.Game.Services
 
         public List<PlayerPosition> PlayersPositions { get; } = new List<PlayerPosition>();
 
+        public GameBoardJail GameBoardJail { get; }
+
 
         private void PlayersInfoRegeneratedHandler() => GeneratePositionsForNewPlayers(_playerRepository.PlayersInfo.ToArray());
 
@@ -47,8 +46,17 @@ namespace Scripts.Game.Services
         public void MovePlayer(PlayerInfo player, uint passedGameSquaresCount)
         {
             PlayerPosition playerPosition = PlayersPositions.Find(a => a.Player == player);
-            playerPosition.PositionOnGameBoard = GetNewPlayerPosition(playerPosition, passedGameSquaresCount);
-            PlayerPositionChanged?.Invoke(player, PlayersPositions.IndexOf(playerPosition), passedGameSquaresCount, playerPosition.PositionOnGameBoard);
+            uint newPlayerPosition = GetNewPlayerPosition(playerPosition, passedGameSquaresCount);
+            uint? passedGameSquaresCountNullable = passedGameSquaresCount;
+            if(newPlayerPosition == GO_TO_JAIL_SQUARE_INDEX)
+            {
+                GameBoardJail.PutPlayerInJail(player);
+                newPlayerPosition = JAIL_SQUARE_INDEX;
+                passedGameSquaresCountNullable = null;
+            }
+
+            playerPosition.PositionOnGameBoard = newPlayerPosition;
+            PlayerPositionChanged?.Invoke(player, PlayersPositions.IndexOf(playerPosition), passedGameSquaresCountNullable, playerPosition.PositionOnGameBoard);
         }
 
         public void MovePlayerToDestinationPoint(PlayerInfo player, uint destinationPointID)
@@ -60,6 +68,8 @@ namespace Scripts.Game.Services
         }
 
         public uint? GetPlayerPosition(PlayerInfo playerInfo) => PlayersPositions.Where(a => a.Player == playerInfo).FirstOrDefault()?.PositionOnGameBoard;
+
+        public PlayerPosition GetPlayerPositionInfo(PlayerInfo playerInfo) => PlayersPositions.Where(a => a.Player == playerInfo).FirstOrDefault();
 
         private void GeneratePositionsForNewPlayers(PlayerInfo[] playerInfos)
         {
@@ -80,6 +90,5 @@ namespace Scripts.Game.Services
                 newPlayerPostion -= GameSquaresCount;
             return newPlayerPostion;
         }
-
     }
 }

@@ -3760,6 +3760,7 @@ MonoBehaviour:
   - {fileID: 1184720399}
   - {fileID: 132970636}
   - {fileID: 1976621667}
+  _jailGameSquarePlacer: {fileID: 1224881439}
 --- !u!114 &232612207
 MonoBehaviour:
   m_ObjectHideFlags: 0
