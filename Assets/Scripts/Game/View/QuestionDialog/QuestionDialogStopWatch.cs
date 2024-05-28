@@ -14,7 +14,7 @@ namespace Scripts.Game.View.QuestionDialog
         private Timer _stopwatch;
 
 
-        public bool IsTicking { get; private set; } = false;
+        public bool IsTicking { get; set; } = false;
 
 
         public event Action TimeIsOver;
@@ -31,7 +31,8 @@ namespace Scripts.Game.View.QuestionDialog
 
         public void StartStopwatch()
         {
-            IsTicking = true;
+            if(IsTicking)
+                return;
             _stopwatch = new Timer()
             {
                 Interval = 1000,
@@ -45,6 +46,7 @@ namespace Scripts.Game.View.QuestionDialog
                 _timerTimeTextShower.text = FormTimeOnStopwatchInString();
             #endif
 
+            IsTicking = true;
             _stopwatch.Start();
         }
 
@@ -55,6 +57,20 @@ namespace Scripts.Game.View.QuestionDialog
                 _stopwatch.Stop();
                 IsTicking = false;
             }
+        }
+
+        public void ResetStopwatch()
+        {
+            _stopwatch.Stop();
+            IsTicking = false;
+            _stopwatch.Dispose();
+            _timeOnStopWatchInSecond = 0;
+
+            #if UNITY_EDITOR
+                Dispatcher.Enqueue(new Action(() => _timerTimeTextShower.text = FormTimeOnStopwatchInString()));
+            #else
+                _timerTimeTextShower.text = FormTimeOnStopwatchInString();
+            #endif
         }
 
         private void Stopwatch_Elapsed(object sender, ElapsedEventArgs e)

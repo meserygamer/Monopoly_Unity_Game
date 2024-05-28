@@ -54,7 +54,6 @@ namespace Scripts.Game.View.QuestionDialog
 
         public void ShowNewQuestion(GameSquareExample example)
         {
-            ClearQuestionDialog();
             _questionTextShower.SetStringToPrint(example.Question.QuestionText);
             _questionDialogStopwatch.SetTime(example.DefaultTimeForAnswerInSecond);
             _questionTextShower.StringPrinted += StartStopwatch;
@@ -77,7 +76,7 @@ namespace Scripts.Game.View.QuestionDialog
 
         public void CloseQuestion()
         {
-            _questionDialogStopwatch.StopStopwatch();
+            ClearQuestionDialog();
             QuestionWindowClosed?.Invoke();
         }
 
@@ -86,6 +85,8 @@ namespace Scripts.Game.View.QuestionDialog
             _isAnswered = false;
             _rightAnswearInputField.ClearRightAnswearField();
             _answearInputField.text = "";
+            _questionDialogStopwatch.ResetStopwatch();
+            _questionTextShower.ResetQuestionString();
         }
     }
 }

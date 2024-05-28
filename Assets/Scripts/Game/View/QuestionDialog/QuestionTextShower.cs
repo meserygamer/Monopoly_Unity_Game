@@ -51,6 +51,19 @@ namespace Scripts.Game.View.QuestionDialog
             _timer.Start();
         }
 
+        public void ResetQuestionString()
+        {
+            _timer.Stop();
+            IsStringPrinting = false;
+            _timer.Dispose();
+            
+            #if UNITY_EDITOR
+                Dispatcher.Enqueue( () => _textMeshProForPrinting.text = "");
+            #else
+                _textMeshProForPrinting.text = "";
+            #endif
+        }
+
         private void TimerElapsed(object sender, ElapsedEventArgs e)
         {
             if(_currentSymbolIndex + 1 >= _stringToPrint.Length)
