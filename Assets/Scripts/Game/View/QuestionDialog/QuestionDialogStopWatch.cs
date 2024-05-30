@@ -1,8 +1,11 @@
 using System;
 using System.Timers;
 using TMPro;
-using UnityEditor.Search;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor.Search;
+#endif
 
 namespace Scripts.Game.View.QuestionDialog
 {

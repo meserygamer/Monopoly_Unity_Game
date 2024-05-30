@@ -1,7 +1,10 @@
 using TMPro;
-using UnityEditor.Search;
 using UnityEngine;
 using UnityEngine.UI;
+
+#if UNITY_EDITOR
+using UnityEditor.Search;
+#endif
 
 public class RightAnswearShower : MonoBehaviour
 {
