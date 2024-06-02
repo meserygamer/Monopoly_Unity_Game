@@ -1,0 +1,9 @@
+.unity-button {
+    flex-grow: 1;
+    flex-direction: column;
+    flex-shrink: 1;
+    flex-wrap: nowrap;
+    margin-top: 0;
+    margin-bottom: 40px;
+    font-size: 34px;
+}
