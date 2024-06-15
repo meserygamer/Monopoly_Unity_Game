@@ -2,6 +2,7 @@ using System;
 using System.Timers;
 using TMPro;
 using UnityEngine;
+using Scripts.Game.View;
 
 #if UNITY_EDITOR
 using UnityEditor.Search;
@@ -63,7 +64,7 @@ namespace Scripts.Game.View.QuestionDialog
             #if UNITY_EDITOR
                 Dispatcher.Enqueue( () => _textMeshProForPrinting.text = "");
             #else
-                _textMeshProForPrinting.text = "";
+                MultiThreadQueue.AddInMultithreadQueue(() => _textMeshProForPrinting.text = "");
             #endif
         }
 
@@ -78,7 +79,7 @@ namespace Scripts.Game.View.QuestionDialog
             #if UNITY_EDITOR
                 Dispatcher.Enqueue( () => _textMeshProForPrinting.text += _stringToPrint[_currentSymbolIndex++]);
             #else
-                _textMeshProForPrinting.text += _stringToPrint[_currentSymbolIndex++];
+                MultiThreadQueue.AddInMultithreadQueue(() => _textMeshProForPrinting.text += _stringToPrint[_currentSymbolIndex++]);
             #endif
             
         }

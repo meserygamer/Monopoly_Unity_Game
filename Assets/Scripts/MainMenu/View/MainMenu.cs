@@ -24,9 +24,17 @@ namespace Scripts.MainMenu.View
         }
 
 
-        private void PlayGame() => SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+        private void PlayGame() 
+        {
+            Debug.Log("Пользователь запустил игру");
+            SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+        }
 
-        private void ShowPreferences() => Debug.Log("Зашел в настройки игры");
+        private void ShowPreferences()
+        {
+            Debug.Log("Зашел в настройки игры");
+            SceneManager.LoadScene("RulesPage", LoadSceneMode.Single);
+        }
 
         private void ExitGame() => Application.Quit();
     }

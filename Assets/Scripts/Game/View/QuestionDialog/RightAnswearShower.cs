@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Scripts.Game.View;
 
 #if UNITY_EDITOR
 using UnityEditor.Search;
@@ -27,10 +28,14 @@ public class RightAnswearShower : MonoBehaviour
                 _answearOutputField.text = rightAnswear;
             });
         #else
-            ColorBlock colorBlock = _answearOutputField.colors;
-            colorBlock.disabledColor = _rightAnswearColor;
-            _answearOutputField.colors = colorBlock;
-            _answearOutputField.text = rightAnswear;
+            MultiThreadQueue.AddInMultithreadQueue(() => 
+            {
+                ColorBlock colorBlock = _answearOutputField.colors;
+                colorBlock.disabledColor = _rightAnswearColor;
+                _answearOutputField.colors = colorBlock;
+                _answearOutputField.text = rightAnswear;
+            });
+            
         #endif
         
     }
@@ -45,10 +50,13 @@ public class RightAnswearShower : MonoBehaviour
                 _answearOutputField.text = rightAnswear;
             });
         #else
-            ColorBlock colorBlock = _answearOutputField.colors;
-            colorBlock.disabledColor = _failureAnswearColor;
-            _answearOutputField.colors = colorBlock;
-            _answearOutputField.text = rightAnswear;
+            MultiThreadQueue.AddInMultithreadQueue(() => 
+            {
+                ColorBlock colorBlock = _answearOutputField.colors;
+                colorBlock.disabledColor = _failureAnswearColor;
+                _answearOutputField.colors = colorBlock;
+                _answearOutputField.text = rightAnswear;
+            });
         #endif
         
     }
@@ -64,10 +72,13 @@ public class RightAnswearShower : MonoBehaviour
                 _answearOutputField.text = "";
             });
         #else
-            ColorBlock colorBlock = _answearOutputField.colors;
-            colorBlock.disabledColor = _defaultColor;
-            _answearOutputField.colors = colorBlock;
-            _answearOutputField.text = "";
+            MultiThreadQueue.AddInMultithreadQueue(() => 
+            {
+                ColorBlock colorBlock = _answearOutputField.colors;
+                colorBlock.disabledColor = _defaultColor;
+                _answearOutputField.colors = colorBlock;
+                _answearOutputField.text = "";
+            });
         #endif
     }
 }

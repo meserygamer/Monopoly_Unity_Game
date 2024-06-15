@@ -2,6 +2,7 @@ using System;
 using System.Timers;
 using TMPro;
 using UnityEngine;
+using Scripts.Game.View;
 
 #if UNITY_EDITOR
 using UnityEditor.Search;
@@ -46,7 +47,7 @@ namespace Scripts.Game.View.QuestionDialog
             #if UNITY_EDITOR
                 Dispatcher.Enqueue(new Action(() => _timerTimeTextShower.text = FormTimeOnStopwatchInString()));
             #else
-                _timerTimeTextShower.text = FormTimeOnStopwatchInString();
+                MultiThreadQueue.AddInMultithreadQueue(() => _timerTimeTextShower.text = FormTimeOnStopwatchInString());
             #endif
 
             IsTicking = true;
@@ -72,7 +73,7 @@ namespace Scripts.Game.View.QuestionDialog
             #if UNITY_EDITOR
                 Dispatcher.Enqueue(new Action(() => _timerTimeTextShower.text = FormTimeOnStopwatchInString()));
             #else
-                _timerTimeTextShower.text = FormTimeOnStopwatchInString();
+                MultiThreadQueue.AddInMultithreadQueue(() => _timerTimeTextShower.text = FormTimeOnStopwatchInString());
             #endif
         }
 
@@ -83,7 +84,7 @@ namespace Scripts.Game.View.QuestionDialog
              #if UNITY_EDITOR    
                 Dispatcher.Enqueue( new Action(() => _timerTimeTextShower.text = FormTimeOnStopwatchInString()));
              #else
-                _timerTimeTextShower.text = FormTimeOnStopwatchInString();
+                MultiThreadQueue.AddInMultithreadQueue(() => _timerTimeTextShower.text = FormTimeOnStopwatchInString());
              #endif
 
             if (_timeOnStopWatchInSecond == 0)

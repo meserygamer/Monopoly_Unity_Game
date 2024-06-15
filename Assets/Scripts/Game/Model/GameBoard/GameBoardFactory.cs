@@ -314,10 +314,10 @@ namespace Scripts.Game.GameField
             if(gameBoardInfo is null)
                 throw new ArgumentNullException(nameof(gameBoardInfo));
             
-            gameBoardInfo.GameSquares[5] = new RailRoadGameSquare("Станция алгебры", 200, _questionSubthemesOnGameField!.GetRange(0, 5));
-            gameBoardInfo.GameSquares[15] = new RailRoadGameSquare("Станция геометрии", 200, _questionSubthemesOnGameField!.GetRange(5, 6));
-            gameBoardInfo.GameSquares[25] = new RailRoadGameSquare("Станция информатики", 200, _questionSubthemesOnGameField!.GetRange(11, 6));
-            gameBoardInfo.GameSquares[35] = new RailRoadGameSquare("Станция физики", 200, _questionSubthemesOnGameField!.GetRange(17, 5));
+            gameBoardInfo.GameSquares[5] = new RailRoadGameSquare("Станция Гаусса", 200, _questionSubthemesOnGameField!.GetRange(0, 5));
+            gameBoardInfo.GameSquares[15] = new RailRoadGameSquare("Станция Евклида", 200, _questionSubthemesOnGameField!.GetRange(5, 6));
+            gameBoardInfo.GameSquares[25] = new RailRoadGameSquare("Станция Пифагора", 200, _questionSubthemesOnGameField!.GetRange(11, 6));
+            gameBoardInfo.GameSquares[35] = new RailRoadGameSquare("Станция Эйлера", 200, _questionSubthemesOnGameField!.GetRange(17, 5));
         }
 
         private void InitializeJailAndParkingSquares(GameBoardInfo gameBoardInfo)
