@@ -35,6 +35,15 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PauseMenuSwitch"",
+                    ""type"": ""Button"",
+                    ""id"": ""333efec4-d390-4085-bfcb-3ff426b1685e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -70,6 +79,17 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
                     ""action"": ""CameraRotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3167537b-ebf4-4a71-b86d-6f4ad7355c73"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard_Mouse;Mobile"",
+                    ""action"": ""PauseMenuSwitch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -107,6 +127,7 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
         // CameraControl
         m_CameraControl = asset.FindActionMap("CameraControl", throwIfNotFound: true);
         m_CameraControl_CameraRotate = m_CameraControl.FindAction("CameraRotate", throwIfNotFound: true);
+        m_CameraControl_PauseMenuSwitch = m_CameraControl.FindAction("PauseMenuSwitch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -169,11 +190,13 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_CameraControl;
     private List<ICameraControlActions> m_CameraControlActionsCallbackInterfaces = new List<ICameraControlActions>();
     private readonly InputAction m_CameraControl_CameraRotate;
+    private readonly InputAction m_CameraControl_PauseMenuSwitch;
     public struct CameraControlActions
     {
         private @PlayerInput m_Wrapper;
         public CameraControlActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @CameraRotate => m_Wrapper.m_CameraControl_CameraRotate;
+        public InputAction @PauseMenuSwitch => m_Wrapper.m_CameraControl_PauseMenuSwitch;
         public InputActionMap Get() { return m_Wrapper.m_CameraControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -186,6 +209,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @CameraRotate.started += instance.OnCameraRotate;
             @CameraRotate.performed += instance.OnCameraRotate;
             @CameraRotate.canceled += instance.OnCameraRotate;
+            @PauseMenuSwitch.started += instance.OnPauseMenuSwitch;
+            @PauseMenuSwitch.performed += instance.OnPauseMenuSwitch;
+            @PauseMenuSwitch.canceled += instance.OnPauseMenuSwitch;
         }
 
         private void UnregisterCallbacks(ICameraControlActions instance)
@@ -193,6 +219,9 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
             @CameraRotate.started -= instance.OnCameraRotate;
             @CameraRotate.performed -= instance.OnCameraRotate;
             @CameraRotate.canceled -= instance.OnCameraRotate;
+            @PauseMenuSwitch.started -= instance.OnPauseMenuSwitch;
+            @PauseMenuSwitch.performed -= instance.OnPauseMenuSwitch;
+            @PauseMenuSwitch.canceled -= instance.OnPauseMenuSwitch;
         }
 
         public void RemoveCallbacks(ICameraControlActions instance)
@@ -231,5 +260,6 @@ public partial class @PlayerInput: IInputActionCollection2, IDisposable
     public interface ICameraControlActions
     {
         void OnCameraRotate(InputAction.CallbackContext context);
+        void OnPauseMenuSwitch(InputAction.CallbackContext context);
     }
 }

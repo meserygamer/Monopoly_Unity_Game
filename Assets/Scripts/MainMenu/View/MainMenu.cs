@@ -33,7 +33,7 @@ namespace Scripts.MainMenu.View
         private void ShowPreferences()
         {
             Debug.Log("Зашел в настройки игры");
-            SceneManager.LoadScene("RulesPage", LoadSceneMode.Single);
+            SceneManager.LoadScene("RulesPage", LoadSceneMode.Additive);
         }
 
         private void ExitGame() => Application.Quit();

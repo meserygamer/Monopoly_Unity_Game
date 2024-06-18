@@ -23,6 +23,9 @@ namespace Scripts.RulesPage.View
         }
 
 
-        public void GoToMainMenu() => SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+        public void GoToMainMenu()
+        {
+            SceneManager.UnloadSceneAsync("RulesPage");
+        }
     }
 }
