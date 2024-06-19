@@ -16,10 +16,10 @@ namespace Scripts
         }
 
 
-        private void LateUpdate()
-        {
-            float rotationVector = _playerInput.CameraControl.CameraRotate.ReadValue<float>();
-            transform.Rotate(Vector3.up, _rotationSpeed * Time.deltaTime * -rotationVector);
-        }
+        public void RotateTripod(float rotationDirection) => 
+            transform.Rotate(Vector3.up, _rotationSpeed * Time.deltaTime * -rotationDirection);
+
+        private void LateUpdate() =>
+            RotateTripod(_playerInput.CameraControl.CameraRotate.ReadValue<float>());
     }
 }
