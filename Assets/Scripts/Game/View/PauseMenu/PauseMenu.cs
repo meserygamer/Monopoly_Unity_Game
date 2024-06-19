@@ -28,7 +28,7 @@ namespace Scripts.Game.View.PauseMenu
 
         private void OnEnable()
         {
-            _continueButton?.onClick.AddListener(ContinueGame);
+            _continueButton?.onClick.AddListener(SwitchGameMenu);
             _rulesButton?.onClick.AddListener(OpenRulesScene);
             _exitToMainMenuButton?.onClick.AddListener(ExitToMainMenu);
 
@@ -36,7 +36,7 @@ namespace Scripts.Game.View.PauseMenu
         }
         private void OnDisable()
         {
-            _continueButton?.onClick.RemoveListener(ContinueGame);
+            _continueButton?.onClick.RemoveListener(SwitchGameMenu);
             _rulesButton?.onClick.RemoveListener(OpenRulesScene);
             _exitToMainMenuButton?.onClick.RemoveListener(ExitToMainMenu);
 
@@ -44,14 +44,14 @@ namespace Scripts.Game.View.PauseMenu
         }
 
 
-        private void SwitchGameMenu(CallbackContext callBackContext) => _pauseCanvas.SetActive(!_pauseCanvas.activeInHierarchy);
-        private void ContinueGame()
+        public void SwitchGameMenu(CallbackContext callBackContext)
         {
             if(_pauseCanvas is null)
                 return;
 
-            _pauseCanvas.SetActive(false);
+            _pauseCanvas.SetActive(!_pauseCanvas.activeInHierarchy);
         }
+        public void SwitchGameMenu() => SwitchGameMenu(new CallbackContext());
         private void OpenRulesScene()
         {
             if(_isRulesPageLoading)

@@ -22,7 +22,7 @@ namespace Scripts.Game.Model.Player
             PlayersInfo.Clear();
             for(uint i = 0; i < playersCount; i++)
             {
-                PlayerInfo playerInfo = new PlayerInfo() {Name = "Player " + (i + 1)};
+                PlayerInfo playerInfo = new PlayerInfo() {Name = "Игрок " + (i + 1)};
                 playerInfo.BankAccount.MoneyAmount = 1500;
                 PlayersInfo.Add(playerInfo);
                 playerInfo.NameChanged += PlayerNameChangedHandler;

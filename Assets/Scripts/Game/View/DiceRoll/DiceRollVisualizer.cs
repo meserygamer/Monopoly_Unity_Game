@@ -1,6 +1,4 @@
 using System;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Scripts.Game.View
@@ -22,22 +20,28 @@ namespace Scripts.Game.View
             _firstDice.DiceAnimationEnded += DiceAnimationEndedHandler;
             _secondDice.DiceAnimationEnded += DiceAnimationEndedHandler;
         }
+        private void OnDisable()
+        {
+            _firstDice.DiceAnimationEnded -= DiceAnimationEndedHandler;
+            _secondDice.DiceAnimationEnded -= DiceAnimationEndedHandler;
+        }
+
 
         private void DiceAnimationEndedHandler()
         {
             _diceRollAnimationEndedCount++;
+            if(_diceRollAnimationEndedCount >= 2)
+            {
+                DiceRollAnimationsEnded?.Invoke();
+                _diceRollAnimationEndedCount = 0;
+            }
         }
 
+
         public void VisualizeDiceRoll(uint firstDiceNumber, uint secondDiceNumber)
-        {
-            new Task(() => _firstDice.StartDiceAnimation(firstDiceNumber)).Start();
-            new Task(() => _secondDice.StartDiceAnimation(secondDiceNumber)).Start();
-            while(_diceRollAnimationEndedCount != 2)
-            {
-                Thread.Sleep(100);
-            }
-            _diceRollAnimationEndedCount = 0;
-            DiceRollAnimationsEnded?.Invoke();
+        {  
+            _firstDice.StartDiceAnimation(firstDiceNumber);
+            _secondDice.StartDiceAnimation(secondDiceNumber);
         }
     }
 }

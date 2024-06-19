@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Scripts.Game.Model.Player;
 
@@ -15,22 +16,35 @@ namespace Scripts.Game.Services
         }
 
 
+        public Queue<PlayerInfo> _movesTurn;
+
         private PlayerRepository _playerRepository;
         private DiceRollService _diceRollService;
         private PlayerMovementService _playerMovementService;
 
-        public Queue<PlayerInfo> _movesTurn;
+        private PlayerInfo _markingTurnPlayer;
 
 
-        public PlayerInfo MakingTurnPlayer { get; private set; }
+        public event Action<PlayerInfo> MakingTurnPlayerPositionWasChanged;
 
 
-        public void DoNextMove()
+        public PlayerInfo MakingTurnPlayer 
+        { 
+            get => _markingTurnPlayer;
+            private set
+            {
+                _markingTurnPlayer = value;
+                MakingTurnPlayerPositionWasChanged?.Invoke(value);
+            }
+        }
+
+
+        public (DiceRoll, PlayerInfo) ThrowCubes()
         {
             MakingTurnPlayer = GetNextPlayer();
 
             DiceRoll playersDiceRoll = _diceRollService.SimulatePlayerRollDice(MakingTurnPlayer);
-            _playerMovementService.MovePlayer(MakingTurnPlayer, playersDiceRoll.SumCameUpNumbers);
+            return (playersDiceRoll, MakingTurnPlayer);
         }
 
         private void PlayersInfoRegeneratedHandler()

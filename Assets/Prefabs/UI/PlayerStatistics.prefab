@@ -510,3 +510,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerNameTextField: {fileID: 2555616243883650020}
   _playerBalanceTextField: {fileID: 7768588047369733746}
+  _playerImage: {fileID: 3968310585084323576}

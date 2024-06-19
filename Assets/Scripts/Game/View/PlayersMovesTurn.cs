@@ -1,11 +1,14 @@
 using Scripts.Game.Presenter;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 namespace Scripts.Game.View
 {
     public sealed class PlayersMovesTurn : MonoBehaviour
     {
+        [SerializeField] private Button _nextMoveButton;
+
         private PlayersMovesTurnPresenter _presenter;
 
 
@@ -19,7 +22,9 @@ namespace Scripts.Game.View
 
         public void PassMoveOn()
         {
+            _nextMoveButton.interactable = false;
             _presenter.DoNextMove();
         }
+        public void UnlockButton() => _nextMoveButton.interactable = true;
     }
 }

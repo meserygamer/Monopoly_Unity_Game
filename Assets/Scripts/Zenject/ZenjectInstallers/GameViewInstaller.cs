@@ -12,6 +12,7 @@ namespace Scripts.Zenject.ZenjectInstallers
         public override void InstallBindings()
         {
             Container.Bind<PlayersStatisticsShower>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<DiceRollVisualizer>().FromComponentInHierarchy().AsSingle();
             Container.Bind<BuyingDialog>().FromComponentInHierarchy().AsSingle();
             Container.Bind<GameSquareOwnershipVisualizerCoordinator>().FromComponentInHierarchy().AsSingle();
             Container.Bind<ConstructionModeButton>().FromComponentInHierarchy().AsSingle();
