@@ -7,19 +7,23 @@ namespace Scripts.MainMenu.View
     public class MainMenu : MonoBehaviour
     {
         Button _buttonPlay;
-        Button _buttonPreferences;
+        Button _buttonRules;
         Button _buttonExit;
+        Button _buttonPlayDemo;
+
         
         private void OnEnable()
         {
             VisualElement root = GetComponent<UIDocument>().rootVisualElement;
 
             _buttonPlay = root.Q<Button>("PlayGameButton");
-            _buttonPreferences = root.Q<Button>("PreferencesButton");
+            _buttonRules = root.Q<Button>("RulesButton");
             _buttonExit = root.Q<Button>("ExitButton");
+            _buttonPlayDemo = root.Q<Button>("PlayDemoButton");
 
             _buttonPlay.clicked += PlayGame;
-            _buttonPreferences.clicked += ShowPreferences;
+            _buttonPlayDemo.clicked += PlayDemo;
+            _buttonRules.clicked += ShowRules;
             _buttonExit.clicked += ExitGame;
         }
 
@@ -30,9 +34,14 @@ namespace Scripts.MainMenu.View
             SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
         }
 
-        private void ShowPreferences()
+        private void PlayDemo()
         {
-            Debug.Log("Зашел в настройки игры");
+            SceneManager.LoadScene("DemoVersion", LoadSceneMode.Single);
+        }
+
+        private void ShowRules()
+        {
+            Debug.Log("Зашел в правила игры");
             SceneManager.LoadScene("RulesPage", LoadSceneMode.Additive);
         }
 

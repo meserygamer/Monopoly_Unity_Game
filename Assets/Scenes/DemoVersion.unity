@@ -4309,7 +4309,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: 1125959495}
   - {fileID: 228802515}
-  - {fileID: 747613928}
+  - {fileID: 747613929}
   - {fileID: 317146862}
   - {fileID: 1253220449}
   - {fileID: 180119696}
@@ -10666,7 +10666,7 @@ MonoBehaviour:
     \u043F\u0440\u0435\u0434\u043F\u0440\u0438\u044F\u0442\u0438\u044F, \u0440\u0435\u043D\u0442\u0430
     \u0440\u0430\u0432\u043D\u0430 \u0441\u0443\u043C\u043C\u0435 \u0432\u044B\u043F\u0430\u0432\u0448\u0438\u0445
     \u043E\u0447\u043A\u043E\u0432, \u0443\u043C\u043D\u043E\u0436\u0435\u043D\u043D\u044B\u0445
-    \u043D\u0430 4.\n\n\u0435\u0441\u043B\u0438 \u0438\u0433\u0440\u043E\u043A \u0432\u043B\u0430\u0434\u0435\u0435\u0442
+    \u043D\u0430 4.\n\n\u0435\u0441\u043B\u0438 \u0438\u0433\u0440\u043E\u043A \u0432\u043B\u0430\u0434\u0435\u0442
     \u043E\u0431\u043E\u0438\u043C\u0438 \u0432\u0438\u0434\u0430\u043C\u0438 \u043A\u043E\u043C\u043C\u0443\u043D\u0430\u043B\u044C\u043D\u044B\u0445
     \u043F\u0440\u0435\u0434\u043F\u0440\u0438\u044F\u0442\u0438\u0439, \u0440\u0435\u043D\u0442\u0430
     \u0440\u0430\u0432\u043D\u0430 \u0441\u0443\u043C\u043C\u0435 \u0432\u044B\u043F\u0430\u0432\u0448\u0438\u0445
@@ -14869,7 +14869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 747613927}
-  - component: {fileID: 747613928}
+  - component: {fileID: 747613929}
   m_Layer: 0
   m_Name: GameServicesInstaller
   m_TagString: Untagged
@@ -14892,7 +14892,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 261927291}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &747613928
+--- !u!114 &747613929
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14901,7 +14901,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 747613925}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9688cfedddd42964290d227c2d123a6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 10d203a2b7a9d4745bf8f13ed01547a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &755972623 stripped

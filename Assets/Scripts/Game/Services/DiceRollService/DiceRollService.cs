@@ -7,30 +7,57 @@ namespace Scripts.Game.Services
 {
     public class DiceRollService
     {
+        public DiceRollService(){}
+
+        public DiceRollService(Queue<DiceRoll> initialMoves)
+        {
+            _initialMoves = initialMoves;
+        }
+
+
         public Dictionary<PlayerInfo, List<DiceRoll>> RollHistory { get; } = 
             new Dictionary<PlayerInfo, List<DiceRoll>>();
+
+        private Queue<DiceRoll> _initialMoves = new Queue<DiceRoll>();
 
 
         public DiceRoll SimulatePlayerRollDice(PlayerInfo player)
         {
             if (player is null)
                 throw new ArgumentNullException();
-            DiceRoll diceRoll = new DiceRoll()
+            
+            DiceRoll diceRoll;
+            if(_initialMoves.Count > 0)
             {
-                FirstCameUpNumber = RollDice(),
-                SecondCameUpNumber = RollDice()
-            };
+                diceRoll = _initialMoves.Dequeue();
+            }
+            else
+            {
+                diceRoll = new DiceRoll()
+                {
+                    FirstCameUpNumber = RollDice(),
+                    SecondCameUpNumber = RollDice()
+                };
+            }
             AddDiceRollToHistory(player, diceRoll);
             return diceRoll;
         }
 
         public DiceRoll SimulatePlayerRollDiceWithoutHistory()
         {
-            DiceRoll diceRoll = new DiceRoll()
+            DiceRoll diceRoll;
+            if(_initialMoves.Count > 0)
             {
-                FirstCameUpNumber = RollDice(),
-                SecondCameUpNumber = RollDice()
-            };
+                diceRoll = _initialMoves.Dequeue();
+            }
+            else
+            {
+                diceRoll = new DiceRoll()
+                {
+                    FirstCameUpNumber = RollDice(),
+                    SecondCameUpNumber = RollDice()
+                };
+            }
             return diceRoll;
         }
 
