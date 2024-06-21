@@ -13,6 +13,8 @@ namespace Scripts.Game.View.BuyingDialog
         [SerializeField] private TangibleAssetInfoShower _tangibleAssetInfoShower;
         [SerializeField] private RailroadInfoShower _railroadInfoShower;
 
+        [SerializeField] private TextMeshProUGUI _ownableSquarePriceField;
+
         private Dictionary<Type, AssetInfoShower> _assetsWithdrawalMethods;
 
 
@@ -24,9 +26,13 @@ namespace Scripts.Game.View.BuyingDialog
         {
             if(_assetsWithdrawalMethods is null)
                 InitAssetsWithdrawalMethods();
+
             if(!_assetsWithdrawalMethods.TryGetValue(ownableSquare.GetType(), out AssetInfoShower assetInfoShower))
                 return;
+
             assetInfoShower.SetUpInfo(ownableSquare);
+            _ownableSquarePriceField.text = "Стоимость: $" + ownableSquare.Cost;
+
             foreach(var infoShower in _assetsWithdrawalMethods.Values)
                 infoShower.HideInfo();
             assetInfoShower.ShowInfo();
@@ -36,7 +42,6 @@ namespace Scripts.Game.View.BuyingDialog
         {
             PlayerPurchaseConfirmed?.Invoke();
         }
-
         public void CancelBuy()
         {
             PlayerPurchaseCanceled?.Invoke();

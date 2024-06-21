@@ -13,6 +13,7 @@ namespace Scripts.Game.View.QuestionDialog
         [SerializeField] QuestionDialogStopWatch _questionDialogStopwatch;
         [SerializeField] TMP_InputField _answearInputField;
         [SerializeField] RightAnswearShower _rightAnswearInputField;
+        [SerializeField] TextMeshProUGUI _answearField; //Только для демо режима
 
         private QuestionDialogPresenter _presenter;
 
@@ -54,6 +55,9 @@ namespace Scripts.Game.View.QuestionDialog
 
         public void ShowNewQuestion(GameSquareExample example)
         {
+            if(_answearField is not null)
+                _answearField.text = _presenter.GetRightAnswearOnQuestion();
+
             _questionTextShower.SetStringToPrint(example.Question.QuestionText);
             _questionDialogStopwatch.SetTime(example.DefaultTimeForAnswerInSecond);
             _questionTextShower.StringPrinted += StartStopwatch;

@@ -88,8 +88,8 @@ namespace Scripts.Zenject.ZenjectInstallers
             return new CommunityChestCardService(new EventCard[] 
             {
                 new GetMoneyFromBankCard("Дополнительное начисление стипендии – получите 200", 200, _bankingService, _playersMovesTurnService),
-                new GetMoneyFromBankCard("Получение разовой повышенной стипендии – получите 100", 200, _bankingService, _playersMovesTurnService),
-                new TakeMoneyToBankCard("Возмещение налога – получите 25", 25, _bankingService, _playersMovesTurnService),
+                new GetMoneyFromBankCard("Получение разовой повышенной стипендии – получите 100", 100, _bankingService, _playersMovesTurnService),
+                new TakeMoneyToBankCard("Сбор на подарок преподавателю – заплатите 25", 25, _bankingService, _playersMovesTurnService),
                 new TakeMoneyToBankCard("Оплата питания – заплатите 50", 50, _bankingService, _playersMovesTurnService),
                 new GetMoneyFromBankCard("Вы заняли второе место на олимпиаде по математике, получите 40", 40, _bankingService, _playersMovesTurnService),
                 new GetMoneyFromBankCard("Выгодное вложение стипендии – получите 50", 50, _bankingService, _playersMovesTurnService),

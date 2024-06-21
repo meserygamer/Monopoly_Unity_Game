@@ -60,5 +60,7 @@ namespace Scripts.Game.Presenter.QuestionDialog
             rightAnswear = _questionService.GetRightAnswearOnQuestion((uint)LastQuestionIndex);
             return _questionService.GiveAnswearToQuestion((uint)LastQuestionIndex, playerAnswear);
         }
+
+        public string GetRightAnswearOnQuestion() => _questionService.GetRightAnswearOnQuestion((uint)LastQuestionIndex);
     }
 }

@@ -7,6 +7,8 @@ namespace Scripts.Game.View
 {
     public sealed class PlayersMovesTurn : MonoBehaviour
     {
+        public bool isMovePlayersPawnWithAnimation = true;
+
         [SerializeField] private Button _nextMoveButton;
 
         private PlayersMovesTurnPresenter _presenter;

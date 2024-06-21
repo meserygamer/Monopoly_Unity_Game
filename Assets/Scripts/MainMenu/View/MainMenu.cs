@@ -31,17 +31,20 @@ namespace Scripts.MainMenu.View
         private void PlayGame() 
         {
             Debug.Log("Пользователь запустил игру");
-            SceneManager.LoadScene("SampleScene", LoadSceneMode.Single);
+            SceneLoaderThroughScreen.LoadSceneName = "SampleScene";
+            SceneManager.LoadScene("LoadGameScreen", LoadSceneMode.Single);
         }
 
         private void PlayDemo()
         {
-            SceneManager.LoadScene("DemoVersion", LoadSceneMode.Single);
+            Debug.Log("Пользователь деморежим игру");
+            SceneLoaderThroughScreen.LoadSceneName = "DemoVersion";
+            SceneManager.LoadScene("LoadGameScreen", LoadSceneMode.Single);
         }
 
         private void ShowRules()
         {
-            Debug.Log("Зашел в правила игры");
+            Debug.Log("Пользователь зашел в правила игры");
             SceneManager.LoadScene("RulesPage", LoadSceneMode.Additive);
         }
 
